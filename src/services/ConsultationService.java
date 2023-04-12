@@ -4,8 +4,12 @@ import entities.Consultation;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import utils.MyConnection;
 
 public class ConsultationService {
@@ -105,9 +109,27 @@ public class ConsultationService {
 }
 
     
-// --------------------------------supprimer---------------------------------------------------
-    public void supprimerConsultation(Consultation c){
-    }
+// --------------------------------supprimer consultation---------------------------------------------------
+    public void deleteConsultation(int idConsult) {  
+
+        String request = "DELETE FROM consultation WHERE id =" + idConsult;
+
+        try {
+            pStmt = cnx.prepareStatement(request);
+            pStmt.executeUpdate();
+            Alert alert1 = new Alert(Alert.AlertType.INFORMATION);
+            alert1.setTitle("Supprimer consultation");
+            alert1.setContentText("La consultation " + idConsult + " a été supprimée avec succès");
+            Optional<ButtonType> answer1 = alert1.showAndWait();
+            System.out.println("Delete Done");
+
+        } catch (SQLException ex) {
+            System.out.println(ex);
+            System.out.println("Erreur lors de la suppression de la consultation");
+        }
+}
+
+
     
     
 }
