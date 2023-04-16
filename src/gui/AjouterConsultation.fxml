@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane id="AnchorPane" prefHeight="554.0" prefWidth="494.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.AjouterConsultationController">
+   <children>
+      <Label layoutX="138.0" layoutY="14.0" text="Ajouter Consultation" textAlignment="CENTER" textFill="#009688" underline="true">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="22.0" layoutY="209.0" text="poids" />
+      <Label layoutX="132.0" layoutY="209.0" text="taille" />
+      <Label layoutX="232.0" layoutY="209.0" text="imc" />
+      <Label layoutX="322.0" layoutY="209.0" text="temperature" />
+      <Label layoutX="398.0" layoutY="321.0" text="prix" />
+      <Label layoutX="22.0" layoutY="265.0" text="pression arterielle" />
+      <Label layoutX="178.0" layoutY="265.0" text="frequence cardiaque" />
+      <Label layoutX="352.0" layoutY="265.0" text="taux glycemie" />
+      <Label layoutX="23.0" layoutY="321.0" text="maladie" />
+      <Label layoutX="195.0" layoutY="321.0" text="traitement" />
+      <Label layoutX="23.0" layoutY="369.0" text="observation" />
+      <Button layoutX="273.0" layoutY="483.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="94.0" text="valider" />
+      <Button layoutX="117.0" layoutY="483.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="94.0" text="reset" />
+      <TextField fx:id="txt_poid" layoutX="65.0" layoutY="205.0" prefHeight="25.0" prefWidth="42.0" />
+      <TextField fx:id="txt_taill" layoutX="164.0" layoutY="205.0" prefHeight="25.0" prefWidth="42.0" />
+      <TextField fx:id="txt_imc" layoutX="261.0" layoutY="205.0" prefHeight="25.0" prefWidth="42.0" />
+      <TextField fx:id="txt_temp" layoutX="398.0" layoutY="205.0" prefHeight="25.0" prefWidth="42.0" />
+      <TextField fx:id="txt_press" layoutX="124.0" layoutY="261.0" prefHeight="25.0" prefWidth="42.0" />
+      <TextField fx:id="txt_freq" layoutX="301.0" layoutY="261.0" prefHeight="25.0" prefWidth="42.0" />
+      <TextField fx:id="txt_tx" layoutX="432.0" layoutY="261.0" prefHeight="25.0" prefWidth="42.0" />
+      <TextField fx:id="txt_mal" layoutX="72.0" layoutY="317.0" prefHeight="25.0" prefWidth="109.0" />
+      <TextField fx:id="txt_trait" layoutX="261.0" layoutY="317.0" prefHeight="25.0" prefWidth="109.0" />
+      <TextField fx:id="txt_px" layoutX="432.0" layoutY="317.0" prefHeight="25.0" prefWidth="42.0" />
+      <TextArea fx:id="txt_obsv" layoutX="27.0" layoutY="393.0" prefHeight="65.0" prefWidth="447.0" />
+      <Label layoutX="17.0" layoutY="133.0" text="Nom" />
+      <Text layoutX="14.0" layoutY="72.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Patient:">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Text>
+      <TextField fx:id="txt_nom" layoutX="50.0" layoutY="129.0" prefHeight="25.0" prefWidth="102.0" />
+      <Label layoutX="168.0" layoutY="133.0" text="Num tel" />
+      <TextField fx:id="txt_tel" layoutX="215.0" layoutY="129.0" prefHeight="25.0" prefWidth="102.0" />
+      <Label layoutX="324.0" layoutY="133.0" text="Num CIN" />
+      <TextField fx:id="txt_cin" layoutX="375.0" layoutY="129.0" prefHeight="25.0" prefWidth="102.0" />
+      <CheckBox layoutX="118.0" layoutY="75.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="109.0" text="New patient" />
+      <CheckBox layoutX="264.0" layoutY="75.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="102.0" selected="true" text="old patient" />
+   </children>
+</AnchorPane>

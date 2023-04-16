@@ -99,8 +99,8 @@ public class ConsultationService {
             c.setObservation(rs.getString("observation"));
             consultations.add(c);
         }
-        pStmt.close();
-        rs.close();
+       // pStmt.close();
+        //rs.close();
     } catch (SQLException e) {
         System.out.println(e);
     }

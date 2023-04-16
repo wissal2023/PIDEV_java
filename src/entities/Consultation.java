@@ -33,6 +33,22 @@ public class Consultation {
         this.traitement = traitement;
     }
 
+    public Consultation(float poids, float taille, float imc, float temperature, float prix, float pression_arterielle, float frequence_cardiaque, float taux_glycemie, String maladie, String traitement, String observation) {
+        this.poids = poids;
+        this.taille = taille;
+        this.imc = imc;
+        this.temperature = temperature;
+        this.prix = prix;
+        this.pression_arterielle = pression_arterielle;
+        this.frequence_cardiaque = frequence_cardiaque;
+        this.taux_glycemie = taux_glycemie;
+        this.maladie = maladie;
+        this.traitement = traitement;
+        this.observation = observation;
+    }
+
+    
+
     public int getId() {
         return id;
     }
