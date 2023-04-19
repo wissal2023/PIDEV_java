@@ -27,8 +27,8 @@
       <Label layoutX="23.0" layoutY="321.0" text="maladie" />
       <Label layoutX="195.0" layoutY="321.0" text="traitement" />
       <Label layoutX="23.0" layoutY="369.0" text="observation" />
-      <Button layoutX="273.0" layoutY="483.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="94.0" text="valider" />
-      <Button layoutX="117.0" layoutY="483.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="94.0" text="reset" />
+      <Button id="btn_valider" fx:id="btn_valider" layoutX="273.0" layoutY="483.0" mnemonicParsing="false" onAction="#Valider" prefHeight="17.0" prefWidth="94.0" text="valider" />
+      <Button fx:id="BT_reset" layoutX="117.0" layoutY="483.0" mnemonicParsing="false" onAction="#Reset" prefHeight="25.0" prefWidth="94.0" text="reset" />
       <TextField fx:id="txt_poid" layoutX="65.0" layoutY="205.0" prefHeight="25.0" prefWidth="42.0" />
       <TextField fx:id="txt_taill" layoutX="164.0" layoutY="205.0" prefHeight="25.0" prefWidth="42.0" />
       <TextField fx:id="txt_imc" layoutX="261.0" layoutY="205.0" prefHeight="25.0" prefWidth="42.0" />

@@ -110,7 +110,7 @@ public class ConsultationService {
 
     
 // --------------------------------supprimer consultation---------------------------------------------------
-    public void deleteConsultation(int idConsult) {  
+    public  void deleteConsultation(int idConsult) {  
 
         String request = "DELETE FROM consultation WHERE id =" + idConsult;
 

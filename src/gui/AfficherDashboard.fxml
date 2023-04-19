@@ -9,10 +9,11 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" prefHeight="541.0" prefWidth="719.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.AfficherDashboardController">
+<AnchorPane id="AnchorPane" prefHeight="618.0" prefWidth="822.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.AfficherDashboardController">
     <children>
       <Text layoutX="269.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dashboard" textAlignment="CENTER" underline="true">
          <font>
@@ -29,16 +30,34 @@
          </image>
       </ImageView>
       <Label layoutX="126.0" layoutY="52.0" text="Nom &amp; prenom:" />
-      <Label layoutX="164.0" layoutY="78.0" text="Spécilité:" />
+      <Label layoutX="164.0" layoutY="78.0" text="Spécialité:" />
       <Label layoutX="170.0" layoutY="105.0" text="Adresse:" />
       <Label layoutX="175.0" layoutY="132.0" text="E-mail:" />
       <Label layoutX="193.0" layoutY="158.0" text="Tel:" />
-      <TextField fx:id="Txt_nom" layoutX="223.0" layoutY="48.0" prefHeight="17.0" prefWidth="192.0" />
-      <TextField fx:id="Txt_special" layoutX="223.0" layoutY="74.0" prefHeight="17.0" prefWidth="192.0" />
-      <TextField fx:id="Txt_adress" layoutX="223.0" layoutY="101.0" prefHeight="17.0" prefWidth="192.0" />
-      <TextField fx:id="Txt_mail" layoutX="223.0" layoutY="128.0" prefHeight="17.0" prefWidth="192.0" />
-      <TextField fx:id="Txt_tel" layoutX="223.0" layoutY="154.0" prefHeight="17.0" prefWidth="192.0" />
-      <BarChart layoutX="12.0" layoutY="200.0" prefHeight="310.0" prefWidth="438.0">
+      <TextField fx:id="Txt_nom" cache="true" editable="false" layoutX="223.0" layoutY="48.0" prefHeight="17.0" prefWidth="192.0" />
+      <TextField fx:id="Txt_special" editable="false" layoutX="223.0" layoutY="74.0" prefHeight="17.0" prefWidth="192.0" />
+      <TextField fx:id="Txt_adress" editable="false" layoutX="223.0" layoutY="101.0" prefHeight="17.0" prefWidth="192.0" />
+      <TextField fx:id="Txt_mail" editable="false" layoutX="223.0" layoutY="128.0" prefHeight="17.0" prefWidth="192.0" />
+      <TextField fx:id="Txt_tel" editable="false" layoutX="223.0" layoutY="154.0" prefHeight="17.0" prefWidth="192.0" />
+      <HBox layoutX="20.0" layoutY="212.0" prefHeight="45.0" prefWidth="192.0">
+         <children>
+            <Label prefHeight="38.0" prefWidth="133.0" text="Nombre Medicaments" />
+            <TextField fx:id="nb_Med" editable="false" prefHeight="33.0" prefWidth="55.0" />
+         </children>
+      </HBox>
+      <HBox layoutX="252.0" layoutY="213.0" prefHeight="45.0" prefWidth="244.0">
+         <children>
+            <Label prefHeight="40.0" prefWidth="187.0" text="Nombre total de Consultation" />
+            <TextField fx:id="nb_Tot_Consult" editable="false" prefHeight="37.0" prefWidth="56.0" />
+         </children>
+      </HBox>
+      <HBox layoutX="525.0" layoutY="216.0" prefHeight="38.0" prefWidth="200.0">
+         <children>
+            <Label prefHeight="33.0" prefWidth="137.0" text="Revenu d'aujourd'hui" />
+            <TextField fx:id="Rev" editable="false" prefHeight="33.0" prefWidth="58.0" />
+         </children>
+      </HBox>
+      <BarChart fx:id="barChart" layoutX="19.0" layoutY="289.0" prefHeight="316.0" prefWidth="778.0" title="Consultations par jours">
         <xAxis>
           <CategoryAxis side="BOTTOM" />
         </xAxis>
@@ -46,11 +65,5 @@
           <NumberAxis side="LEFT" />
         </yAxis>
       </BarChart>
-      <TextField fx:id="nb_Med" layoutX="641.0" layoutY="250.0" prefHeight="25.0" prefWidth="45.0" />
-      <Label layoutX="507.0" layoutY="254.0" text="Nombre Medicaments" />
-      <TextField fx:id="Rev" layoutX="641.0" layoutY="355.0" prefHeight="25.0" prefWidth="45.0" />
-      <TextField fx:id="nb_Tot_Consult" layoutX="641.0" layoutY="299.0" prefHeight="25.0" prefWidth="45.0" />
-      <Label layoutX="475.0" layoutY="303.0" text="Nombre total de Consultation" />
-      <Label layoutX="518.0" layoutY="359.0" text="Revenu d'aujourd'hui" />
     </children>
 </AnchorPane>

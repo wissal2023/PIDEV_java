@@ -1,78 +1,102 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package gui;
 
 import entities.Consultation;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.List;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Button;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 import services.ConsultationService;
 import utils.MyConnection;
 
-/**
- * FXML Controller class
- *
- * @author MBM info
- */
 public class AjouterConsultationController implements Initializable {
 
+    /*
     @FXML
-    private TextField Txt_nom;
+    private TextField txt_nom;
+
     @FXML
     private TextField txt_tel;
+
     @FXML
     private TextField txt_cin;
+    */
+    
+     
     @FXML
     private TextField txt_poid;
+
     @FXML
     private TextField txt_taill;
+
     @FXML
     private TextField txt_imc;
+
     @FXML
     private TextField txt_temp;
+
     @FXML
     private TextField txt_press;
+
     @FXML
     private TextField txt_freq;
+
     @FXML
     private TextField txt_tx;
+
     @FXML
     private TextField txt_mal;
+
     @FXML
     private TextField txt_trait;
+
     @FXML
     private TextField txt_px;
+
     @FXML
-    private TextField txt_obsv;
+    private TextArea txt_obsv;
+
+    @FXML
+    private Button btn_valider;
+    
 
     private final Connection cnx;
     private PreparedStatement ste;
     
     public AjouterConsultationController() {
-        MyConnection bd=MyConnection.getInstance();
+        MyConnection bd = MyConnection.getInstance();
         cnx=bd.getCnx();
     }
     
-    /**
-     * Initializes the controller class.
-     */
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        Txt_nom.setText("John Doe");
-        txt_tel.setText("23456789");
-        txt_cin.setText("12345678");
+       // txt_nom.setText("John Doe");
+       // txt_tel.setText("23456789");
+       // txt_cin.setText("12345678");
+       //NumConslt.setText("72");
+       
+        
     }  
     
+    //control de saisie
     @FXML
     private void Valider(ActionEvent event) throws Exception {
        try{
@@ -80,12 +104,7 @@ public class AjouterConsultationController implements Initializable {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setHeaderText(null);
             alert.setContentText("Vous devez entrez le poids du patient");
-            alert.showAndWait();  
-        }else if(txt_poid.getText().length()<3){
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setHeaderText(null);
-            alert.setContentText("la description doit comporter au moins 5 caractères");
-            alert.showAndWait();  
+            alert.showAndWait(); 
         }else if(txt_taill.getText().equals("")){
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setHeaderText(null);
@@ -138,29 +157,59 @@ public class AjouterConsultationController implements Initializable {
             alert.showAndWait();      
         }
         
-        else{          
-            
+        else{     
             Consultation c = new Consultation(Float.parseFloat(txt_poid.getText()),Float.parseFloat(txt_taill.getText()),
                     Float.parseFloat(txt_imc.getText()), Float.parseFloat(txt_temp.getText()),
                     Float.parseFloat(txt_px.getText()), Float.parseFloat(txt_press.getText()),
                     Float.parseFloat(txt_freq.getText()), Float.parseFloat(txt_tx.getText()),
                     txt_mal.getText(), txt_trait.getText(),txt_obsv.getText());
+            
             ConsultationService consultService = new ConsultationService();
             consultService.ajouterConsultation(c);
+            
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("AJOUT AVEC SUCCES");
             alert.setHeaderText(null);
             alert.setContentText("Consultation ajouté avec succès");
             alert.showAndWait();
+            
+            // close the current window
+            Stage stage = (Stage) btn_valider.getScene().getWindow();
+            stage.close();
+             
         }
        }
-        catch(RuntimeException ex)
-        {
-             Alert alert = new Alert(Alert.AlertType.ERROR," Les informations sont Invalides ou incompletes Veuillez les verifiers ",ButtonType.CLOSE);
+        catch(Exception ex){
+            Alert alert = new Alert(Alert.AlertType.ERROR," Les informations sont Invalides ou incompletes Veuillez les verifiers ",ButtonType.CLOSE);
             alert.showAndWait();
         }
+       
         String title = "succes ";
         String message = "Consultation ajouté avec succes";
+        
+        // open the "afficherConsultation" page
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("afficherConsultation.fxml"));
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+            Stage stage2 = new Stage();
+            stage2.setScene(scene);
+            stage2.show();
     }
+    @FXML
+    private void Reset (ActionEvent event)  {
+    
+        txt_poid.setText("");
+        txt_taill.setText("");
+        txt_imc.setText("");
+        txt_temp.setText("");
+        txt_press.setText("");
+        txt_freq.setText("");
+        txt_tx.setText("");
+        txt_mal.setText("");
+        txt_trait.setText("");
+        txt_px.setText("");
+        txt_obsv.setText("");
+    }
+    
     
 }
