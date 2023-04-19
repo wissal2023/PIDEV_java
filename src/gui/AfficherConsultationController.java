@@ -2,15 +2,14 @@
 package gui;
 
 import entities.Consultation;
+import entities.Ordonnance;
 import entities.RendezVous;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
@@ -23,7 +22,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
+import javafx.scene.control.Tab;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -33,10 +32,9 @@ import javafx.stage.StageStyle;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
-import org.apache.poi.xssf.usermodel.XSSFRow;
-import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import services.ConsultationService;
+import services.OrdonnanceService;
 import utils.MyConnection;
 
 
@@ -44,9 +42,30 @@ import utils.MyConnection;
 public class AfficherConsultationController implements Initializable {
 
     @FXML
+    private Tab tabOrd;
+
+    @FXML
+    private TableView<Ordonnance> tab_Ord;
+
+    @FXML
+    private TableColumn<Ordonnance, String> code_ordonnance;
+
+    @FXML
+    private TableColumn<Ordonnance, String> medicaments;
+
+    @FXML
+    private TableColumn<Ordonnance, String> dosage;
+
+    @FXML
+    private TableColumn<Ordonnance, Integer> nombre_jours;
+
+    @FXML
+    private TableColumn<Ordonnance, Date> date_de_creation;
+    
+    @FXML
     private TableView<Consultation> table_consult;
     @FXML
-    private TableColumn<Consultation, Integer> consult_id;    
+    private TableColumn<RendezVous, Integer> patient_id;    
     @FXML
     private TableColumn<Consultation, String> mal;    
     @FXML
@@ -56,10 +75,11 @@ public class AfficherConsultationController implements Initializable {
     @FXML
     private TableColumn<RendezVous, Date> date; 
     
+    @FXML
+    private AfficherOrdonnanceController afficherOrdonnanceController;
+    
     private final Connection cnx;
     private PreparedStatement pste;
-    
-    
     
     public AfficherConsultationController() {
         MyConnection bd = MyConnection.getInstance();
@@ -73,36 +93,35 @@ public class AfficherConsultationController implements Initializable {
         List<Consultation> listConsultation ;
         ConsultationService consultServ = new ConsultationService();
         listConsultation= consultServ.showConsultation();
-        
-            consult_id.setCellValueFactory(new PropertyValueFactory<>("id"));    
+                
+            patient_id.setCellValueFactory(new PropertyValueFactory<>("patient_id"));    
             mal.setCellValueFactory(new PropertyValueFactory<>("maladie"));
             trait.setCellValueFactory(new PropertyValueFactory<>("traitement"));
             temp.setCellValueFactory(new PropertyValueFactory<>("temperature"));
             date.setCellValueFactory(new PropertyValueFactory<>("date"));
-            
             table_consult.getItems().setAll(listConsultation);
+            
     }
 
-    //---------------------------- load list --------------------------------------    
-    private void loadData() throws SQLException {
-        ObservableList<Consultation> listConsultation = FXCollections.observableArrayList();
-        ConsultationService consultServ = new ConsultationService();
-        listConsultation.clear();
-        listConsultation = (ObservableList<Consultation>) consultServ.showConsultation();
-        consult_id.setCellValueFactory(new PropertyValueFactory<>("id"));    
-        mal.setCellValueFactory(new PropertyValueFactory<>("maladie"));
-        trait.setCellValueFactory(new PropertyValueFactory<>("traitement"));
-        temp.setCellValueFactory(new PropertyValueFactory<>("temperature"));
-        date.setCellValueFactory(new PropertyValueFactory<>("date"));
-        
-        table_consult.getItems().setAll(listConsultation);
-    }
-    private void handleRefresh(ActionEvent event) throws SQLException {
-        loadData();
-        
+    @FXML
+    void AfficherOrdonnanceController(ActionEvent event) {
+       
+        List<Ordonnance> listOrdonnance ;
+        OrdonnanceService consultServ = new OrdonnanceService();
+        listOrdonnance= consultServ.showOrdonnance();
+
+        code_ordonnance.setCellValueFactory(new PropertyValueFactory<>("code_ordonnance"));    
+        medicaments.setCellValueFactory(new PropertyValueFactory<>("medicaments"));
+        dosage.setCellValueFactory(new PropertyValueFactory<>("dosage"));
+        nombre_jours.setCellValueFactory(new PropertyValueFactory<>("nombre_jours"));
+        date_de_creation.setCellValueFactory(new PropertyValueFactory<>("date_de_creation"));
+
+        tab_Ord.getItems().setAll(listOrdonnance);
+
     }
     
-    //--------------------------buton ajouter --------------------------
+    
+//---------------------------------------- buton ajouter -------------------------------------------
     
     @FXML
     private void AjouterConsultation(ActionEvent event) throws IOException {
@@ -114,7 +133,7 @@ public class AfficherConsultationController implements Initializable {
         stage.show();
     }
 
-     //--------------------------buton modifier --------------------------
+//----------------------------------------- buton modifier --------------------------------------------
     @FXML
     private void editerConsultation(ActionEvent event) throws IOException {
         Consultation selectedForEdit = table_consult.getSelectionModel().getSelectedItem();
@@ -129,13 +148,13 @@ public class AfficherConsultationController implements Initializable {
         stage.show();
         
     }
-    //--------------------------buton supprimer --------------------------
+//----------------------------------------------- buton supprimer ---------------------------------------------
     @FXML
      private void supprimerConsultation(ActionEvent event) throws IOException, SQLException {
         Consultation selectedForDelete = table_consult.getSelectionModel().getSelectedItem();
-        System.out.println("selected consultation id"+selectedForDelete.getId());
+        System.out.println("selected consultation id"+selectedForDelete.getIdConslt());
         ConsultationService service = new ConsultationService();
-        service.deleteConsultation(selectedForDelete.getId());
+        service.deleteConsultation(selectedForDelete.getIdConslt());
 
         // Remove the selected consultation from the table view
         table_consult.getItems().remove(selectedForDelete);
@@ -145,8 +164,9 @@ public class AfficherConsultationController implements Initializable {
         
     }
     
-   //--------------------------------buton telecharger ------------------------------------------
-    public void download() throws IOException {
+//--------------------------------------------------- buton telecharger --------------------------------------------
+    @FXML
+     public void download() throws IOException {
        
         FileChooser fileChooser = new FileChooser();// Create a new FileChooser object
         fileChooser.setTitle("Save List Consultations");// Set the title of the dialog box       

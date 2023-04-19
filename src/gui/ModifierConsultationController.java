@@ -9,8 +9,6 @@ import entities.Consultation;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -88,7 +86,7 @@ public class ModifierConsultationController implements Initializable {
     }    
 
     public void inflateUI(Consultation consultation) {
-        NumConslt.setText(Integer.toString(consultation.getId()));
+        NumConslt.setText(Integer.toString(consultation.getIdConslt()));
         txt_poid.setText(Float.toString(consultation.getPoids()));
         txt_taill.setText(Float.toString(consultation.getTaille()));
         txt_imc.setText(Float.toString(consultation.getImc()));

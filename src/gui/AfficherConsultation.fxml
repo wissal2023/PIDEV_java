@@ -1,31 +1,80 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" prefHeight="473.0" prefWidth="690.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.AfficherConsultationController">
+<AnchorPane id="AnchorPane" prefHeight="556.0" prefWidth="691.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.AfficherConsultationController">
    <children>
-      <Text layoutX="224.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="List Consultations" textAlignment="CENTER" underline="true">
-         <font>
-            <Font name="System Bold" size="24.0" />
-         </font>
-      </Text>
-      <TableView fx:id="table_consult" layoutX="3.0" layoutY="60.0" prefHeight="401.0" prefWidth="577.0">
-        <columns>
-          <TableColumn fx:id="consult_id" prefWidth="112.0" text="Nom patient" />
-          <TableColumn fx:id="mal" prefWidth="120.0" text="Maladie" />
-            <TableColumn fx:id="trait" prefWidth="122.0" text="Traitement" />
-            <TableColumn fx:id="temp" prefWidth="99.0" text="Temperature" />
-            <TableColumn fx:id="date" prefWidth="123.0" text="Date Consultation" />
-        </columns>
-      </TableView>
-      <Button id="BT_AjoutConsult" fx:id="BT_AjoutConsult" layoutX="584.0" layoutY="60.0" mnemonicParsing="false" onAction="#AjouterConsultation" prefHeight="25.0" prefWidth="92.0" text="Ajouter" />
-      <Button id="BT_Telecharger" fx:id="BT_Telecharger" layoutX="584.0" layoutY="158.0" mnemonicParsing="false" onAction="#download" prefHeight="25.0" prefWidth="92.0" text="Télécharger" />
-      <Button id="BT_AjoutConsult" fx:id="BT_ModifConsult" layoutX="584.0" layoutY="93.0" mnemonicParsing="false" onAction="#editerConsultation" prefHeight="25.0" prefWidth="92.0" text="Modifier" />
-      <Button id="BT_AjoutConsult" fx:id="BT_DelConsult" layoutX="584.0" layoutY="126.0" mnemonicParsing="false" onAction="#supprimerConsultation" prefHeight="25.0" prefWidth="92.0" text="Supprimer" />
+      <TabPane layoutY="6.0" prefHeight="464.0" prefWidth="690.0" tabClosingPolicy="UNAVAILABLE">
+         <tabs>
+            <Tab text="Consultations">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="435.0" prefWidth="748.0">
+                     <children>
+                        <TextField layoutX="14.0" layoutY="69.0" prefHeight="25.0" prefWidth="197.0" text="chercher consultation" />
+                        <TableView fx:id="table_consult" layoutX="14.0" layoutY="102.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="244.0" prefWidth="563.0">
+                          <columns>
+                            <TableColumn fx:id="patient_id" prefWidth="81.0" text="Nom patient" />
+                            <TableColumn fx:id="mal" prefWidth="70.0" text="Maladie" />
+                              <TableColumn fx:id="trait" prefWidth="81.0" text="Traitement" />
+                              <TableColumn fx:id="temp" prefWidth="90.0" text="Temperature" />
+                              <TableColumn fx:id="date" prefWidth="111.0" text="Date Consultation" />
+                              <TableColumn prefWidth="129.0" text="code ordonnance" />
+                          </columns>
+                        </TableView>
+                        <Button id="BT_AjoutConsult" fx:id="BT_AjoutConsult" layoutX="584.0" layoutY="102.0" mnemonicParsing="false" onAction="#AjouterConsultation" prefHeight="25.0" prefWidth="92.0" text="Ajouter" />
+                        <Button id="BT_AjoutConsult" fx:id="BT_ModifConsult" layoutX="584.0" layoutY="144.0" mnemonicParsing="false" onAction="#editerConsultation" prefHeight="25.0" prefWidth="92.0" text="Modifier" />
+                        <Button id="BT_AjoutConsult" fx:id="BT_DelConsult" layoutX="584.0" layoutY="184.0" mnemonicParsing="false" onAction="#supprimerConsultation" prefHeight="25.0" prefWidth="92.0" text="Supprimer" />
+                        <Button id="BT_Telecharger" fx:id="BT_Telecharger" layoutX="584.0" layoutY="225.0" mnemonicParsing="false" onAction="#download" prefHeight="25.0" prefWidth="92.0" text="Télécharger" />
+                        <Text layoutX="232.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" text="List Consultations" textAlignment="CENTER" underline="true">
+                           <font>
+                              <Font name="System Bold" size="24.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab text="Ordonnances">
+               <content>
+                  <AnchorPane prefHeight="497.0" prefWidth="690.0">
+                     <children>
+                        <Text layoutX="242.0" layoutY="56.0" strokeType="OUTSIDE" strokeWidth="0.0" text="List Ordonnances" textAlignment="CENTER" underline="true">
+                           <font>
+                              <Font name="System Bold" size="24.0" />
+                           </font>
+                        </Text>
+                        <TableView fx:id="tab_Ord" layoutX="24.0" layoutY="112.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="244.0" prefWidth="563.0">
+                           <columns>
+                              <TableColumn fx:id="code_ordonnance" prefWidth="138.0" text="Code ordonnance" />
+                              <TableColumn fx:id="medicaments" prefWidth="114.0" text="medicaments" />
+                              <TableColumn fx:id="dosage" prefWidth="77.0" text="dosage" />
+                              <TableColumn fx:id="nombre_jours" prefWidth="102.0" text="nombre de jours" />
+                              <TableColumn fx:id="date_de_creation" prefWidth="130.0" text="date de creation" />
+                           </columns>
+                        </TableView>
+                        <Button id="BT_AjoutConsult" fx:id="BT_AjoutOrd" layoutX="594.0" layoutY="112.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="92.0" text="Ajouter" />
+                        <Button id="BT_AjoutConsult" fx:id="BT_ModifOrd" layoutX="594.0" layoutY="154.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="92.0" text="Modifier" />
+                        <Button id="BT_AjoutConsult" fx:id="BT_DelOrd" layoutX="594.0" layoutY="194.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="92.0" text="Supprimer" />
+                        <Button id="BT_Telecharger" fx:id="BT_print" layoutX="594.0" layoutY="235.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="92.0" text="Imprimer" />
+                        <TextField fx:id="search_ord" layoutX="24.0" layoutY="79.0" prefHeight="25.0" prefWidth="197.0" text="chercher ordonnance" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab text="Fiches Medicales">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+               </content>
+            </Tab>
+         </tabs>
+      </TabPane>
    </children>
 </AnchorPane>

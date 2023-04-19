@@ -2,15 +2,15 @@ package entities;
 
 public class Consultation {
     
-    private int id;
+    private int idConslt;
     private float poids, taille, imc, temperature, prix, pression_arterielle, frequence_cardiaque, taux_glycemie;
     private String maladie, traitement, observation;
 
     public Consultation() {
     }
 
-    public Consultation(int id, float poids, float taille, float imc, float temperature, float prix, float pression_arterielle, float frequence_cardiaque, float taux_glycemie, String maladie, String traitement, String observation) {
-        this.id = id;
+    public Consultation(int idConslt, float poids, float taille, float imc, float temperature, float prix, float pression_arterielle, float frequence_cardiaque, float taux_glycemie, String maladie, String traitement, String observation) {
+        this.idConslt = idConslt;
         this.poids = poids;
         this.taille = taille;
         this.imc = imc;
@@ -24,8 +24,8 @@ public class Consultation {
         this.observation = observation;
     }
 
-    public Consultation(int id, float poids, float taille, float prix, String maladie, String traitement) {
-        this.id = id;
+    public Consultation(int idConslt, float poids, float taille, float prix, String maladie, String traitement) {
+        this.idConslt = idConslt;
         this.poids = poids;
         this.taille = taille;
         this.prix = prix;
@@ -49,8 +49,8 @@ public class Consultation {
 
     
 
-    public int getId() {
-        return id;
+    public int getIdConslt() {
+        return idConslt;
     }
 
     public float getPoids() {
@@ -97,8 +97,8 @@ public class Consultation {
         return observation;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setIdConslt(int idConslt) {
+        this.idConslt = idConslt;
     }
 
     public void setPoids(float poids) {
@@ -147,7 +147,7 @@ public class Consultation {
 
     @Override
     public String toString() {
-        return "Consultation{" + "id=" + id + ", poids=" + poids + 
+        return "Consultation{" + "idConslt=" + idConslt + ", poids=" + poids + 
                 ", taille=" + taille + ", imc=" + imc + ", temperature=" 
                 + temperature + ", prix=" + prix + ", pression_arterielle=" + pression_arterielle 
                 + ", frequence_cardiaque=" + frequence_cardiaque + ", taux_glycemie=" 

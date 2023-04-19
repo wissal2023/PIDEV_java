@@ -66,7 +66,7 @@ public class ConsultationService {
         pStmt.setFloat(3, c.getImc());
         pStmt.setFloat(4, c.getTemperature());
         pStmt.setFloat(5, c.getPrix());
-        pStmt.setInt(6, c.getId());
+        pStmt.setInt(6, c.getIdConslt());
         pStmt.executeUpdate();
         System.out.println("Consultation modifiée avec succès");
     } catch (SQLException ex) {
@@ -85,7 +85,7 @@ public class ConsultationService {
         ResultSet rs = pStmt.executeQuery();
         while (rs.next()) {
             Consultation c = new Consultation();
-            c.setId(rs.getInt("id"));
+            c.setIdConslt(rs.getInt("id"));
             c.setPoids(rs.getFloat("poids"));
             c.setTaille(rs.getFloat("taille"));
             c.setImc(rs.getFloat("imc"));

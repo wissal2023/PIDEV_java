@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.TilePane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" prefHeight="554.0" prefWidth="494.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.AjouterConsultationController">
+<AnchorPane id="AnchorPane" prefHeight="554.0" prefWidth="509.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.AjouterConsultationController">
    <children>
-      <Label layoutX="138.0" layoutY="14.0" text="Ajouter Consultation" textAlignment="CENTER" textFill="#009688" underline="true">
+      <Label layoutX="141.0" layoutY="14.0" text="Ajouter Consultation" textAlignment="CENTER" textFill="#009688" underline="true">
          <font>
             <Font size="24.0" />
          </font>
@@ -40,18 +41,22 @@
       <TextField fx:id="txt_trait" layoutX="261.0" layoutY="317.0" prefHeight="25.0" prefWidth="109.0" />
       <TextField fx:id="txt_px" layoutX="432.0" layoutY="317.0" prefHeight="25.0" prefWidth="42.0" />
       <TextArea fx:id="txt_obsv" layoutX="27.0" layoutY="393.0" prefHeight="65.0" prefWidth="447.0" />
-      <Label layoutX="17.0" layoutY="133.0" text="Nom" />
-      <Text layoutX="14.0" layoutY="72.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Patient:">
+      <TilePane layoutX="14.0" layoutY="66.0" prefHeight="120.0" prefWidth="225.0">
+         <children>
+            <RadioButton mnemonicParsing="false" text="New patient" />
+            <RadioButton mnemonicParsing="false" text="Old patient" />
+            <Label text="Nom" />
+            <TextField fx:id="txt_nom" prefHeight="25.0" prefWidth="102.0" />
+            <Label text="Num CIN" />
+            <TextField fx:id="txt_cin" prefHeight="25.0" prefWidth="102.0" />
+            <Label text="Num tel" />
+            <TextField fx:id="txt_tel" prefHeight="25.0" prefWidth="102.0" />
+         </children>
+      </TilePane>
+      <Text layoutX="20.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Patient:">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
       </Text>
-      <TextField fx:id="txt_nom" layoutX="50.0" layoutY="129.0" prefHeight="25.0" prefWidth="102.0" />
-      <Label layoutX="168.0" layoutY="133.0" text="Num tel" />
-      <TextField fx:id="txt_tel" layoutX="215.0" layoutY="129.0" prefHeight="25.0" prefWidth="102.0" />
-      <Label layoutX="324.0" layoutY="133.0" text="Num CIN" />
-      <TextField fx:id="txt_cin" layoutX="375.0" layoutY="129.0" prefHeight="25.0" prefWidth="102.0" />
-      <CheckBox layoutX="118.0" layoutY="75.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="109.0" text="New patient" />
-      <CheckBox layoutX="264.0" layoutY="75.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="102.0" selected="true" text="old patient" />
    </children>
 </AnchorPane>

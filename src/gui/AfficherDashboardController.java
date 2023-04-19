@@ -1,12 +1,15 @@
 package gui;
 
+import entities.User;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
+import java.sql.Blob;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -16,6 +19,7 @@ import javafx.scene.Scene;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import utils.MyConnection;
@@ -54,11 +58,13 @@ public class AfficherDashboardController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        //Image image = new Image(getClass().getResourceAsStream("imgDoc.jpg"));
-        //imgDoc.setImage(image);       
+        
+        // image = new Image(getClass().getResourceAsStream("imgDoc.jpg"));
+       // imgDoc.setImage(image);       
         //nb_Med.setText("0");
-        String query = "SELECT u.nom, u.specialite, u.adresse, u.email, u.num_tel FROM User u WHERE u.roles LIKE '[\"medcin\"]'";
+        String query = "SELECT u.nom, u.specialite, u.adresse, u.email, u.num_tel, u.image FROM User u WHERE u.roles LIKE '[\"medcin\"]' ";
         try {
+            
             pste = cnx.prepareStatement(query);
             ResultSet rs = pste.executeQuery();
             if(rs.next()) {
@@ -68,12 +74,20 @@ public class AfficherDashboardController implements Initializable {
                 String email = rs.getString("email");
                 String num_tel = rs.getString("num_tel");
                 
+                if (rs.next()) {
+                    InputStream inputStream = rs.getBinaryStream("image");
+                    // Use the inputStream to read the image data
+                }     
                 Txt_nom.setText(nom);
                 Txt_special.setText(specialite);
                 Txt_adress.setText(adresse);
                 Txt_mail.setText(email);
                 Txt_tel.setText(num_tel);
+                
+                pste.close();
+                rs.close();
             }
+            
         } catch(SQLException ex) {
             System.out.println("Error while fetching doctor information: " + ex.getMessage());
         }

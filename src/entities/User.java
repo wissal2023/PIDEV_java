@@ -5,7 +5,7 @@ import java.util.Objects;
 
 public class User {
     
-    private int id  ;
+    private int idUser  ;
     private String email,nom, prenom, adresse, num_tel, specialite, cin, image ;
     
     private List<RendezVous> rendezVouses;
@@ -14,8 +14,8 @@ public class User {
     public User() {
     }
 
-    public User(int id, String email, String nom, String prenom, String adresse, String num_tel, String specialite, String cin, String image, List<RendezVous> rendezVouses, List<String> roles) {
-        this.id = id;
+    public User(int idUser, String email, String nom, String prenom, String adresse, String num_tel, String specialite, String cin, String image, List<RendezVous> rendezVouses, List<String> roles) {
+        this.idUser = idUser;
         this.email = email;
         this.nom = nom;
         this.prenom = prenom;
@@ -29,8 +29,8 @@ public class User {
     }
 
    
-    public int getId() {
-        return id;
+    public int getIdUser() {
+        return idUser;
     }
 
     public String getEmail() {
@@ -73,8 +73,8 @@ public class User {
         return roles;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setIdUser(int idUser) {
+        this.idUser = idUser;
     }
 
     public void setEmail(String email) {
@@ -135,7 +135,7 @@ public class User {
             return false;
         }
         final User other = (User) obj;
-        if (this.id != other.id) {
+        if (this.idUser != other.idUser) {
             return false;
         }
         if (!Objects.equals(this.email, other.email)) {
@@ -170,7 +170,7 @@ public class User {
 
     @Override
     public String toString() {
-        return "User{" + "id=" + id + ", email=" + email + ", nom=" + nom +
+        return "User{" + "idUser=" + idUser + ", email=" + email + ", nom=" + nom +
                 ", prenom=" + prenom + ", adresse=" + adresse + ", num_tel=" +
                 num_tel + ", specialite=" + specialite + ", cin=" + cin + ", image=" +
                 image + ", rendezVouses=" + rendezVouses + ", roles=" + roles + '}';

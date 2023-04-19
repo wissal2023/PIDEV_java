@@ -22,7 +22,7 @@ public class OrdonnanceService {
     public OrdonnanceService() {
            cnx = MyConnection.getInstance().getCnx();
     }
-// --------------------------------ADD consultation ---------------------------------------------------
+// --------------------------------ADD ordonnance ---------------------------------------------------
     public void ajouterOrdonnance(Ordonnance ord){
       
         String request="INSERT INTO ordonnance (nombre_jours, medicaments, code_ordonnance, dosage,qrCodeFilename, description, date_de_creation, date_de_modification)"
@@ -37,7 +37,7 @@ public class OrdonnanceService {
             pStmt.setString(2, ord.getMedicaments());
             pStmt.setString(3, ord.getCode_ordonnance());
             pStmt.setString(4, ord.getDosage());
-            pStmt.setString(5, ord.getQrCodeFilename());
+            //pStmt.setString(5, ord.getQrCodeFilename());
             pStmt.setString(6, ord.getDescription());
             pStmt.setDate(7, dateCreation);
             pStmt.setDate(8, dateModification);
@@ -95,7 +95,7 @@ public class OrdonnanceService {
             ord.setMedicaments(rs.getString("medicaments"));
             ord.setCode_ordonnance(rs.getString("code_ordonnance"));
             ord.setDosage(rs.getString("dosage"));
-            ord.setQrCodeFilename(rs.getString("qrCodeFilename"));
+        //    ord.setQrCodeFilename(rs.getString("qrCodeFilename"));
             ord.setDescription(rs.getString("description"));
             ord.setDate_de_creation(rs.getDate("date_de_creation"));
             ord.setDate_de_modification(rs.getDate("date_de_modification"));
