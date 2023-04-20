@@ -1,5 +1,5 @@
 
-package gui;
+package controllers;
 
 import entities.Consultation;
 import entities.Ordonnance;
@@ -14,8 +14,6 @@ import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -23,6 +21,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -40,28 +39,12 @@ import utils.MyConnection;
 
 
 public class AfficherConsultationController implements Initializable {
-
-    @FXML
-    private Tab tabOrd;
-
-    @FXML
-    private TableView<Ordonnance> tab_Ord;
-
-    @FXML
-    private TableColumn<Ordonnance, String> code_ordonnance;
-
-    @FXML
-    private TableColumn<Ordonnance, String> medicaments;
-
-    @FXML
-    private TableColumn<Ordonnance, String> dosage;
-
-    @FXML
-    private TableColumn<Ordonnance, Integer> nombre_jours;
-
-    @FXML
-    private TableColumn<Ordonnance, Date> date_de_creation;
     
+    @FXML
+    private TabPane tabPane;
+    @FXML
+    private Tab tabConsult, tabOrd;
+    //*************  consultation *********
     @FXML
     private TableView<Consultation> table_consult;
     @FXML
@@ -74,9 +57,20 @@ public class AfficherConsultationController implements Initializable {
     private TableColumn<Consultation, String> temp;    
     @FXML
     private TableColumn<RendezVous, Date> date; 
-    
+            //*************  Ordonnance *********
     @FXML
-    private AfficherOrdonnanceController afficherOrdonnanceController;
+    private TableView<Ordonnance> tab_Ord;
+    @FXML
+    private TableColumn<Ordonnance, String> code_ordonnance;
+    @FXML
+    private TableColumn<Ordonnance, String> medicaments;
+    @FXML
+    private TableColumn<Ordonnance, String> dosage;
+    @FXML
+    private TableColumn<Ordonnance, Integer> nombre_jours;
+    @FXML
+    private TableColumn<Ordonnance, Date> date_de_creation;
+   
     
     private final Connection cnx;
     private PreparedStatement pste;
@@ -93,23 +87,16 @@ public class AfficherConsultationController implements Initializable {
         List<Consultation> listConsultation ;
         ConsultationService consultServ = new ConsultationService();
         listConsultation= consultServ.showConsultation();
-                
-            patient_id.setCellValueFactory(new PropertyValueFactory<>("patient_id"));    
-            mal.setCellValueFactory(new PropertyValueFactory<>("maladie"));
-            trait.setCellValueFactory(new PropertyValueFactory<>("traitement"));
-            temp.setCellValueFactory(new PropertyValueFactory<>("temperature"));
-            date.setCellValueFactory(new PropertyValueFactory<>("date"));
-            table_consult.getItems().setAll(listConsultation);
-            
-    }
-
-    @FXML
-    void AfficherOrdonnanceController(ActionEvent event) {
-       
+        patient_id.setCellValueFactory(new PropertyValueFactory<>("patient_id"));    
+        mal.setCellValueFactory(new PropertyValueFactory<>("maladie"));
+        trait.setCellValueFactory(new PropertyValueFactory<>("traitement"));
+        temp.setCellValueFactory(new PropertyValueFactory<>("temperature"));
+        date.setCellValueFactory(new PropertyValueFactory<>("date"));
+        table_consult.getItems().setAll(listConsultation);
+        
         List<Ordonnance> listOrdonnance ;
-        OrdonnanceService consultServ = new OrdonnanceService();
-        listOrdonnance= consultServ.showOrdonnance();
-
+        OrdonnanceService ordnltServ = new OrdonnanceService();
+        listOrdonnance= ordnltServ.showOrdonnance();        
         code_ordonnance.setCellValueFactory(new PropertyValueFactory<>("code_ordonnance"));    
         medicaments.setCellValueFactory(new PropertyValueFactory<>("medicaments"));
         dosage.setCellValueFactory(new PropertyValueFactory<>("dosage"));
@@ -117,6 +104,24 @@ public class AfficherConsultationController implements Initializable {
         date_de_creation.setCellValueFactory(new PropertyValueFactory<>("date_de_creation"));
 
         tab_Ord.getItems().setAll(listOrdonnance);
+        
+       
+    }
+
+    @FXML
+    void AfficherConsultationController(ActionEvent event) {
+       
+        List<Consultation> listConsultation ;
+        ConsultationService consultServ = new ConsultationService();
+        listConsultation = consultServ.showConsultation();
+
+        patient_id.setCellValueFactory(new PropertyValueFactory<>("patient_id"));    
+        mal.setCellValueFactory(new PropertyValueFactory<>("maladie"));
+        trait.setCellValueFactory(new PropertyValueFactory<>("traitement"));
+        temp.setCellValueFactory(new PropertyValueFactory<>("temperature"));
+        date.setCellValueFactory(new PropertyValueFactory<>("date"));
+        
+        table_consult.getItems().setAll(listConsultation);
 
     }
     
@@ -126,7 +131,7 @@ public class AfficherConsultationController implements Initializable {
     @FXML
     private void AjouterConsultation(ActionEvent event) throws IOException {
        
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("AjouterConsultation.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("./gui/AjouterConsultation.fxml"));
         Parent root = loader.load();
         Stage stage = new Stage();
         stage.setScene(new Scene(root));
@@ -138,7 +143,7 @@ public class AfficherConsultationController implements Initializable {
     private void editerConsultation(ActionEvent event) throws IOException {
         Consultation selectedForEdit = table_consult.getSelectionModel().getSelectedItem();
         
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("ModifierConsultation.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("./gui/ModifierConsultation.fxml"));
         Parent parent = loader.load();
         ModifierConsultationController controller = (ModifierConsultationController) loader.getController();
         controller.inflateUI(selectedForEdit);

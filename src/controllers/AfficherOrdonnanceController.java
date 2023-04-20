@@ -1,5 +1,5 @@
 
-package gui;
+package controllers;
 
 import entities.Ordonnance;
 import java.net.URL;
@@ -17,6 +17,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -27,6 +28,7 @@ import utils.MyConnection;
 
 public class AfficherOrdonnanceController implements Initializable {
 
+    
     @FXML
     private Tab tabOrd;
 
@@ -73,21 +75,27 @@ public class AfficherOrdonnanceController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
-        List<Ordonnance> listOrdonnance ;
-        OrdonnanceService consultServ = new OrdonnanceService();
-        listOrdonnance= consultServ.showOrdonnance();
-
-        
-            code_ordonnance.setCellValueFactory(new PropertyValueFactory<>("code_ordonnance"));    
-            medicaments.setCellValueFactory(new PropertyValueFactory<>("medicaments"));
-            dosage.setCellValueFactory(new PropertyValueFactory<>("dosage"));
-            nombre_jours.setCellValueFactory(new PropertyValueFactory<>("nombre_jours"));
-            date_de_creation.setCellValueFactory(new PropertyValueFactory<>("date_de_creation"));
-            
-            tab_Ord.getItems().setAll(listOrdonnance);
     }    
+    
+    
+    @FXML
+    void AfficherOrdonnanceController (ActionEvent event) {
+       
+        List<Ordonnance> listOrdonnance ;
+        OrdonnanceService ordnServ = new OrdonnanceService();
+        listOrdonnance= ordnServ.showOrdonnance();
+
+        code_ordonnance.setCellValueFactory(new PropertyValueFactory<>("code_ordonnance"));    
+        medicaments.setCellValueFactory(new PropertyValueFactory<>("medicaments"));
+        dosage.setCellValueFactory(new PropertyValueFactory<>("dosage"));
+        nombre_jours.setCellValueFactory(new PropertyValueFactory<>("nombre_jours"));
+        date_de_creation.setCellValueFactory(new PropertyValueFactory<>("date_de_creation"));
+
+        tab_Ord.getItems().setAll(listOrdonnance);
+
+    }
     //---------------------------- load list --------------------------------------    
+    /*
     private void loadData() throws SQLException {
         ObservableList<Ordonnance> listOrdonnance = FXCollections.observableArrayList();
         OrdonnanceService ordnServ = new OrdonnanceService();
@@ -105,5 +113,5 @@ public class AfficherOrdonnanceController implements Initializable {
         loadData();
         
     } 
-    
+    */
 }

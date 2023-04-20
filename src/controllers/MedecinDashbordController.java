@@ -1,4 +1,4 @@
-package gui;
+package controllers;
 
 import entities.User;
 import java.io.IOException;
@@ -24,7 +24,7 @@ import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import utils.MyConnection;
 
-public class AfficherDashboardController implements Initializable {
+public class MedecinDashbordController implements Initializable {
 
     @FXML
     private ImageView imgDoc;
@@ -51,7 +51,7 @@ public class AfficherDashboardController implements Initializable {
     private final Connection cnx;
     private PreparedStatement pste;
     
-    public AfficherDashboardController() {
+    public MedecinDashbordController() {
         MyConnection bd = MyConnection.getInstance();
         cnx=bd.getCnx();
     }
@@ -129,7 +129,7 @@ public class AfficherDashboardController implements Initializable {
     @FXML
     private void afficherConsultation(ActionEvent event) throws IOException {
         
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("AfficherConsultation.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("./gui/AfficherConsultation.fxml"));
         Parent root = loader.load();
         Stage stage = new Stage();
         stage.setScene(new Scene(root));

@@ -1,9 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package gui;
+package controllers;
 
 import entities.Consultation;
 import java.net.URL;
@@ -13,11 +8,11 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Button;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -25,16 +20,20 @@ import javafx.stage.Stage;
 import services.ConsultationService;
 import utils.MyConnection;
 
-/**
- * FXML Controller class
- *
- * @author MBM info
- */
-public class ModifierConsultationController implements Initializable {
+public class AjouterConsultationController implements Initializable {
+
+    /*
+    @FXML
+    private TextField txt_nom;
 
     @FXML
-    private TextField NumConslt;
+    private TextField txt_tel;
+
+    @FXML
+    private TextField txt_cin;
+    */
     
+     
     @FXML
     private TextField txt_poid;
 
@@ -75,31 +74,22 @@ public class ModifierConsultationController implements Initializable {
     private final Connection cnx;
     private PreparedStatement ste;
     
-    public ModifierConsultationController() {
+    public AjouterConsultationController() {
         MyConnection bd = MyConnection.getInstance();
         cnx=bd.getCnx();
     }
     
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+       // txt_nom.setText("John Doe");
+       // txt_tel.setText("23456789");
+       // txt_cin.setText("12345678");
+       //NumConslt.setText("72");
+       
         
-    }    
-
-    public void inflateUI(Consultation consultation) {
-        NumConslt.setText(Integer.toString(consultation.getIdConslt()));
-        txt_poid.setText(Float.toString(consultation.getPoids()));
-        txt_taill.setText(Float.toString(consultation.getTaille()));
-        txt_imc.setText(Float.toString(consultation.getImc()));
-        txt_temp.setText(Float.toString(consultation.getTemperature()));
-        txt_px.setText(Float.toString(consultation.getPrix()));
-        txt_press.setText(Float.toString(consultation.getPression_arterielle()));
-        txt_freq.setText(Float.toString(consultation.getFrequence_cardiaque()));
-        txt_tx.setText(Float.toString(consultation.getTaux_glycemie()));
-        txt_mal.setText(consultation.getMaladie());
-        txt_trait.setText(consultation.getTraitement());
-        txt_obsv.setText(consultation.getObservation());
-    }
-
+    }  
+    
     //control de saisie
     @FXML
     private void Valider(ActionEvent event) throws Exception {
@@ -199,7 +189,6 @@ public class ModifierConsultationController implements Initializable {
             stage2.setScene(scene);
             stage2.show();
     }
-    
     @FXML
     private void Reset (ActionEvent event)  {
     
@@ -215,5 +204,6 @@ public class ModifierConsultationController implements Initializable {
         txt_px.setText("");
         txt_obsv.setText("");
     }
+    
     
 }

@@ -1,181 +1,243 @@
 package entities;
 
-import java.util.List;
-import java.util.Objects;
+import java.util.Date;
+
+
 
 public class User {
-    
-    private int idUser  ;
-    private String email,nom, prenom, adresse, num_tel, specialite, cin, image ;
-    
-    private List<RendezVous> rendezVouses;
-    private List<String> roles;
+    private int id;
+    private String email;
+    private String nom;
+    private String prenom;
+    private String password;
+    private Date date_de_naissance;
+    private String sexe;
+    private String Adresse;
+    private String tel;
+    private String specialité;
+    private String etat;
+    private Date date_de_creation;
+    private String roles;
+    private String Image;
+
 
     public User() {
     }
 
-    public User(int idUser, String email, String nom, String prenom, String adresse, String num_tel, String specialite, String cin, String image, List<RendezVous> rendezVouses, List<String> roles) {
-        this.idUser = idUser;
-        this.email = email;
+    public User(int id,String nom, String prenom) {
+        this.id=id;
         this.nom = nom;
         this.prenom = prenom;
-        this.adresse = adresse;
-        this.num_tel = num_tel;
-        this.specialite = specialite;
-        this.cin = cin;
-        this.image = image;
-        this.rendezVouses = rendezVouses;
+    }
+    
+    
+     public User(int id,String image) {
+        this.id=id;
+        this.Image=image;
+    }
+     
+    public User(int id,String nom, String prenom,String email, Date date_de_naissance, String sexe, String tel, String Adresse, String specialité,String image) {
+       
+        this.id=id;
+        this.nom = nom;
+        this.prenom = prenom;
+        this.email = email;
+        this.date_de_naissance = date_de_naissance;
+        this.sexe = sexe;
+        this.tel = tel;
+        this.Adresse = Adresse;
+        this.specialité = specialité;
+        this.Image=image;
+    
+    }
+    
+      public User(String nom, String prenom,String email, Date date_de_naissance, String sexe, String tel, String Adresse) {
+       
+        this.nom = nom;
+        this.prenom = prenom;
+        this.email = email;
+        this.date_de_naissance = date_de_naissance;
+        this.sexe = sexe;
+        this.tel = tel;
+        this.Adresse = Adresse;    
+    }
+      
+       public User(String nom, String prenom,String email, Date date_de_naissance, String sexe, String tel, String Adresse,String specialite) {
+       
+        this.nom = nom;
+        this.prenom = prenom;
+        this.email = email;
+        this.date_de_naissance = date_de_naissance;
+        this.sexe = sexe;
+        this.tel = tel;
+        this.Adresse = Adresse;  
+        this.specialité=specialite;
+    }
+    
+    
+    
+        public User(int id,String nom, String prenom,String email, Date date_de_naissance, String sexe, String tel, String Adresse,String image) {
+       
+        this.id=id;
+        this.nom = nom;
+        this.prenom = prenom;
+        this.email = email;
+        this.date_de_naissance = date_de_naissance;
+        this.sexe = sexe;
+        this.tel = tel;
+        this.Adresse = Adresse;
+        this.Image=image;
+     
+    }
+    
+    
+    
+
+    public User(int id, String nom, String prenom, String email, String password, String etat, Date date_de_naissance, String roles,String Adresse,String sexe,String tel,String specialite,Date date_de_creation,String image) {
+        this.id = id;
+        this.nom = nom;
+        this.prenom = prenom;
+        this.email = email;
+        this.password = password;
+        this.etat = etat;
+        this.date_de_naissance = date_de_naissance;
         this.roles = roles;
+        this.Adresse = Adresse;
+        this.sexe = sexe;
+        this.tel = tel;
+        this.specialité = specialite;
+        this.date_de_creation=date_de_creation;
+        this.Image=image;
+        
     }
 
-   
-    public int getIdUser() {
-        return idUser;
+    public User(String nom, String prenom, String email, String password) {
+        this.id = id;
+        this.nom = nom;
+        this.prenom = prenom;
+        this.email = email;
+        this.password = password;
     }
 
-    public String getEmail() {
-        return email;
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getNom() {
         return nom;
     }
 
-    public String getPrenom() {
-        return prenom;
-    }
-
-    public String getAdresse() {
-        return adresse;
-    }
-
-    public String getNum_tel() {
-        return num_tel;
-    }
-
-    public String getSpecialite() {
-        return specialite;
-    }
-
-    public String getCin() {
-        return cin;
-    }
-
-    public String getImage() {
-        return image;
-    }
-
-    public List<RendezVous> getRendezVouses() {
-        return rendezVouses;
-    }
-    
-    public List<String> getRoles() {
-        return roles;
-    }
-
-    public void setIdUser(int idUser) {
-        this.idUser = idUser;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
     public void setNom(String nom) {
         this.nom = nom;
+    }
+
+    public String getPrenom() {
+        return prenom;
     }
 
     public void setPrenom(String prenom) {
         this.prenom = prenom;
     }
 
-    public void setAdresse(String adresse) {
-        this.adresse = adresse;
+    public String getEmail() {
+        return email;
     }
 
-    public void setNum_tel(String num_tel) {
-        this.num_tel = num_tel;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    public void setSpecialite(String specialite) {
-        this.specialite = specialite;
+    public String getPassword() {
+        return password;
     }
 
-    public void setCin(String cin) {
-        this.cin = cin;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
-    public void setImage(String image) {
-        this.image = image;
+    public Date getDate_de_naissance() {
+        return date_de_naissance;
     }
 
-    public void setRendezVouses(List<RendezVous> rendezVouses) {
-        this.rendezVouses = rendezVouses;
+    public void setDate_de_naissance(Date date_de_naissance) {
+        this.date_de_naissance = date_de_naissance;
     }
 
-    public void setRoles(List<String> roles) {
+    public String getSexe() {
+        return sexe;
+    }
+
+    public void setSexe(String sexe) {
+        this.sexe = sexe;
+    }
+
+    public String getAdresse() {
+        return Adresse;
+    }
+
+    public void setAdresse(String Adresse) {
+        this.Adresse = Adresse;
+    }
+
+    public String getSpecialité() {
+        return specialité;
+    }
+
+    public void setSpecialité(String specialité) {
+        this.specialité = specialité;
+    }
+
+    public String getEtat() {
+        return etat;
+    }
+
+    public void setEtat(String etat) {
+        this.etat = etat;
+    }
+
+    public Date getDate_de_creation() {
+        return date_de_creation;
+    }
+
+    public void setDate_de_creation(Date date_de_creation) {
+        this.date_de_creation = date_de_creation;
+    }
+    
+    
+    
+    public String getTel() {
+        return tel;
+    }
+
+    public void setTel(String tel) {
+        this.tel = tel;
+    }  
+    
+    
+    public String getImage() {
+        return Image;
+    }
+
+    public void setImage(String Image) {
+        this.Image = Image;
+    }
+
+    public String getRoles() {
+        return roles;
+    }
+
+    public void setRoles(String roles) {
         this.roles = roles;
     }
 
     @Override
-    public int hashCode() {
-        int hash = 3;
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final User other = (User) obj;
-        if (this.idUser != other.idUser) {
-            return false;
-        }
-        if (!Objects.equals(this.email, other.email)) {
-            return false;
-        }
-        if (!Objects.equals(this.nom, other.nom)) {
-            return false;
-        }
-        if (!Objects.equals(this.prenom, other.prenom)) {
-            return false;
-        }
-        if (!Objects.equals(this.adresse, other.adresse)) {
-            return false;
-        }
-        if (!Objects.equals(this.num_tel, other.num_tel)) {
-            return false;
-        }
-        if (!Objects.equals(this.specialite, other.specialite)) {
-            return false;
-        }
-        if (!Objects.equals(this.cin, other.cin)) {
-            return false;
-        }
-        if (!Objects.equals(this.image, other.image)) {
-            return false;
-        }
-        if (!Objects.equals(this.rendezVouses, other.rendezVouses)) {
-            return false;
-        }
-        return Objects.equals(this.roles, other.roles);
-    }
-
-    @Override
     public String toString() {
-        return "User{" + "idUser=" + idUser + ", email=" + email + ", nom=" + nom +
-                ", prenom=" + prenom + ", adresse=" + adresse + ", num_tel=" +
-                num_tel + ", specialite=" + specialite + ", cin=" + cin + ", image=" +
-                image + ", rendezVouses=" + rendezVouses + ", roles=" + roles + '}';
+        return "User{" + "id=" + id + ", email=" + email + ", nom=" + nom + ", prenom=" + prenom + ", password=" + password + ", date_de_naissance=" + date_de_naissance + ", sexe=" + sexe + ", Adresse=" + Adresse + ", tel=" + tel + ", specialit\u00e9=" + specialité + ", etat=" + etat + ", date_de_creation=" + date_de_creation + ", roles=" + roles + ", Image=" + Image + '}';
     }
-    
-    
-    
+
+  
 }

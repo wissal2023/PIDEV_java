@@ -4,12 +4,26 @@ import java.util.Date;
 
 public class RendezVous {
     private int idRdv;
-    private String symptomes, etat;
-    private Date heureDebut, heureFin, date;
-    private User patient;
-    
+    private String symptomes;
+    private String etat;
+    private Date date;
+    private Date heureDebut;
+    private Date heureFin;
+    private int idPlanning;
+    private String fullName;
+
     public RendezVous() {
     } 
+
+    public RendezVous(int idRdv, String symptomes, String etat, Date date, Date heureDebut, Date heureFin, int idPlanning) {
+        this.idRdv = idRdv;
+        this.symptomes = symptomes;
+        this.etat = etat;
+        this.date = date;
+        this.heureDebut = heureDebut;
+        this.heureFin = heureFin;
+        this.idPlanning = idPlanning;
+    }
     
     public RendezVous(int idRdv, String symptomes, String etat, Date date, Date heureDebut, Date heureFin) {
         this.idRdv = idRdv;
@@ -20,14 +34,31 @@ public class RendezVous {
         this.heureFin = heureFin;
     }
 
-    public RendezVous(int idRdv, String symptomes, Date date, User patient) {
-        this.idRdv = idRdv;
+    public RendezVous(String symptomes, String etat, Date date, Date heureDebut, Date heureFin, int idPlanning) {
         this.symptomes = symptomes;
+        this.etat = etat;
         this.date = date;
-        this.patient = patient;
+        this.heureDebut = heureDebut;
+        this.heureFin = heureFin;
+        this.idPlanning = idPlanning;
     }
 
-    
+    public String getFullName() {
+        return fullName;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
+
+    public int getIdPlanning() {
+        return idPlanning;
+    }
+
+    public void setIdPlanning(int idPlanning) {
+        this.idPlanning = idPlanning;
+    }
+
     public int getIdRdv() {
         return idRdv;
     }
@@ -80,6 +111,5 @@ public class RendezVous {
     public String toString() {
         return "RendezVous{" + "idRdv=" + idRdv + ", symptomes=" + symptomes + ", etat=" + etat + ", date=" + date + ", heureDebut=" + heureDebut + ", heureFin=" + heureFin + '}';
     }
-    
-    
+        
 }
