@@ -4,6 +4,7 @@ package controllers;
 import entities.Consultation;
 import entities.Ordonnance;
 import entities.RendezVous;
+import entities.User;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -48,13 +49,15 @@ public class AfficherConsultationController implements Initializable {
     @FXML
     private TableView<Consultation> table_consult;
     @FXML
-    private TableColumn<RendezVous, Integer> patient_id;    
+    private TableColumn<RendezVous, Integer> patient_name;    
     @FXML
     private TableColumn<Consultation, String> mal;    
     @FXML
     private TableColumn<Consultation, String> trait;    
     @FXML
-    private TableColumn<Consultation, String> temp;    
+    private TableColumn<Consultation, String> temp; 
+    @FXML
+    private TableColumn<Consultation, String> poids;
     @FXML
     private TableColumn<RendezVous, Date> date; 
             //*************  Ordonnance *********
@@ -87,11 +90,12 @@ public class AfficherConsultationController implements Initializable {
         List<Consultation> listConsultation ;
         ConsultationService consultServ = new ConsultationService();
         listConsultation= consultServ.showConsultation();
-        patient_id.setCellValueFactory(new PropertyValueFactory<>("patient_id"));    
+        patient_name.setCellValueFactory(new PropertyValueFactory<>("idConslt"));
+        poids.setCellValueFactory(new PropertyValueFactory<>("poids"));
         mal.setCellValueFactory(new PropertyValueFactory<>("maladie"));
         trait.setCellValueFactory(new PropertyValueFactory<>("traitement"));
         temp.setCellValueFactory(new PropertyValueFactory<>("temperature"));
-        date.setCellValueFactory(new PropertyValueFactory<>("date"));
+        date.setCellValueFactory(new PropertyValueFactory<>("date"));//dateRDV 
         table_consult.getItems().setAll(listConsultation);
         
         List<Ordonnance> listOrdonnance ;
@@ -102,12 +106,22 @@ public class AfficherConsultationController implements Initializable {
         dosage.setCellValueFactory(new PropertyValueFactory<>("dosage"));
         nombre_jours.setCellValueFactory(new PropertyValueFactory<>("nombre_jours"));
         date_de_creation.setCellValueFactory(new PropertyValueFactory<>("date_de_creation"));
-
         tab_Ord.getItems().setAll(listOrdonnance);
         
-       
+        /*
+        List<RendezVous> listRendezVous ;
+        RendezVousService rdvServ = new RendezVousService();
+        listRendezVous= rdvServ.showRendezVous();        
+        date.setCellValueFactory(new PropertyValueFactory<>("date")); 
+        
+        List<User> listUser ;
+        UserService userServ = new UserService();
+        listUser= rdvServ.showUser();        
+        name.setCellValueFactory(new PropertyValueFactory<>("nom")); 
+        */
     }
 
+    /*
     @FXML
     void AfficherConsultationController(ActionEvent event) {
        
@@ -115,7 +129,7 @@ public class AfficherConsultationController implements Initializable {
         ConsultationService consultServ = new ConsultationService();
         listConsultation = consultServ.showConsultation();
 
-        patient_id.setCellValueFactory(new PropertyValueFactory<>("patient_id"));    
+        patient_name.setCellValueFactory(new PropertyValueFactory<>("patient_id"));    
         mal.setCellValueFactory(new PropertyValueFactory<>("maladie"));
         trait.setCellValueFactory(new PropertyValueFactory<>("traitement"));
         temp.setCellValueFactory(new PropertyValueFactory<>("temperature"));
@@ -124,26 +138,37 @@ public class AfficherConsultationController implements Initializable {
         table_consult.getItems().setAll(listConsultation);
 
     }
-    
+    */
     
 //---------------------------------------- buton ajouter -------------------------------------------
     
     @FXML
     private void AjouterConsultation(ActionEvent event) throws IOException {
        
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("./gui/AjouterConsultation.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/AjouterConsultation.fxml"));
         Parent root = loader.load();
         Stage stage = new Stage();
         stage.setScene(new Scene(root));
         stage.show();
     }
+    
+    @FXML
+    private void AjouterOrdonnance(ActionEvent event) throws IOException {
+       
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/AjouterOrdonnance.fxml"));
+        Parent root = loader.load();
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root));
+        stage.show();
+    }
+    
 
 //----------------------------------------- buton modifier --------------------------------------------
     @FXML
     private void editerConsultation(ActionEvent event) throws IOException {
         Consultation selectedForEdit = table_consult.getSelectionModel().getSelectedItem();
         
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("./gui/ModifierConsultation.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/ModifierConsultation.fxml"));
         Parent parent = loader.load();
         ModifierConsultationController controller = (ModifierConsultationController) loader.getController();
         controller.inflateUI(selectedForEdit);

@@ -89,6 +89,7 @@ public class AjouterConsultationController implements Initializable {
        
         
     }  
+        // ************************** buton valider *********************
     
     //control de saisie
     @FXML
@@ -182,13 +183,14 @@ public class AjouterConsultationController implements Initializable {
         String message = "Consultation ajouté avec succes";
         
         // open the "afficherConsultation" page
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("afficherConsultation.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/afficherConsultation.fxml"));
             Parent root = loader.load();
             Scene scene = new Scene(root);
             Stage stage2 = new Stage();
             stage2.setScene(scene);
             stage2.show();
     }
+        // ************************** buton reset *********************
     @FXML
     private void Reset (ActionEvent event)  {
     

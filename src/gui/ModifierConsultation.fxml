@@ -9,7 +9,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" prefHeight="550.0" prefWidth="509.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.ModifierConsultationController">
+<AnchorPane id="AnchorPane" prefHeight="550.0" prefWidth="509.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ModifierConsultationController">
     <children>
       <Label layoutX="138.0" layoutY="14.0" text="Modifier  Consultation" textAlignment="CENTER" textFill="#009688" underline="true">
          <font>

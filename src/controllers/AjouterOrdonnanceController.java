@@ -1,3 +1,4 @@
+
 package controllers;
 
 import entities.Consultation;
@@ -14,149 +15,87 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
-import javafx.scene.control.TextArea;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import services.ConsultationService;
 import utils.MyConnection;
 
-/**
- * FXML Controller class
- *
- * @author MBM info
- */
-public class ModifierConsultationController implements Initializable {
-
-    @FXML
-    private TextField NumConslt;
+public class AjouterOrdonnanceController implements Initializable {
     
-    @FXML
-    private TextField txt_poid;
-
-    @FXML
-    private TextField txt_taill;
-
-    @FXML
-    private TextField txt_imc;
-
-    @FXML
-    private TextField txt_temp;
-
-    @FXML
-    private TextField txt_press;
-
-    @FXML
-    private TextField txt_freq;
-
-    @FXML
-    private TextField txt_tx;
-
-    @FXML
-    private TextField txt_mal;
-
-    @FXML
-    private TextField txt_trait;
-
-    @FXML
-    private TextField txt_px;
-
-    @FXML
-    private TextArea txt_obsv;
-
     @FXML
     private Button btn_valider;
+    @FXML
+    private Button BT_reset;
+    @FXML
+    private TextField txt_nom;
+    @FXML
+    private TextField txt_cin;
+    @FXML
+    private TextField txt_tel;
+    @FXML
+    private TextField txt_codeOrd;
     
-
+    @FXML
+    private TextField txt_desc;
+    @FXML
+    private TextField txt_med;
+    @FXML
+    private TextField txt_dos;
+    @FXML
+    private TextField txt_nbr;
+    @FXML
+    private TextField txt_date;
+    @FXML
+    private ChoiceBox<Consultation> ch_trai;
+    
     private final Connection cnx;
     private PreparedStatement ste;
     
-    public ModifierConsultationController() {
+    public AjouterOrdonnanceController() {
         MyConnection bd = MyConnection.getInstance();
         cnx=bd.getCnx();
     }
-    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
+        // TODO
     }    
-
-    public void inflateUI(Consultation consultation) {
-        NumConslt.setText(Integer.toString(consultation.getIdConslt()));
-        txt_poid.setText(Float.toString(consultation.getPoids()));
-        txt_taill.setText(Float.toString(consultation.getTaille()));
-        txt_imc.setText(Float.toString(consultation.getImc()));
-        txt_temp.setText(Float.toString(consultation.getTemperature()));
-        txt_px.setText(Float.toString(consultation.getPrix()));
-        txt_press.setText(Float.toString(consultation.getPression_arterielle()));
-        txt_freq.setText(Float.toString(consultation.getFrequence_cardiaque()));
-        txt_tx.setText(Float.toString(consultation.getTaux_glycemie()));
-        txt_mal.setText(consultation.getMaladie());
-        txt_trait.setText(consultation.getTraitement());
-        txt_obsv.setText(consultation.getObservation());
-    }
-    // ************************** buton valider *********************
-    //control de saisie
+    
+    
     @FXML
     private void Valider(ActionEvent event) throws Exception {
        try{
-        if(txt_poid.getText().equals("")){
+        if(txt_desc.getText().equals("")){
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setHeaderText(null);
             alert.setContentText("Vous devez entrez le poids du patient");
             alert.showAndWait(); 
-        }else if(txt_taill.getText().equals("")){
+        }else if(txt_med.getText().equals("")){
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setHeaderText(null);
             alert.setContentText("Vous devez entrez la taille du patient");
             alert.showAndWait(); 
-        }else if(txt_imc.getText().equals("")){
+        }else if(txt_dos.getText().equals("")){
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setHeaderText(null);
             alert.setContentText("Vous devez entrez l'imc du patient");
             alert.showAndWait(); 
-        }else if(txt_temp.getText().equals("")){
+        }else if(txt_nbr.getText().equals("")){
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setHeaderText(null);
             alert.setContentText("Vous devez entrez la température du patient");
             alert.showAndWait();  
-        }else if(txt_press.getText().equals("")){
+        }else if(txt_date.getText().equals("")){
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setHeaderText(null);
             alert.setContentText("Vous devez entrez la pression arterielle du patient");
             alert.showAndWait();  
-        }else if(txt_freq.getText().equals("")){
+        }else if(ch_trai.getText().equals("")){
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setHeaderText(null);
             alert.setContentText("Vous devez entrez la fréquence cardiaque du patient");
-            alert.showAndWait();  
-        }else if(txt_tx.getText().equals("")){
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setHeaderText(null);
-            alert.setContentText("Vous devez entrez le taux de glycemie du patient");
-            alert.showAndWait();  
-        }else if(txt_mal.getText().equals("")){
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setHeaderText(null);
-            alert.setContentText("Vous devez entrez la maladie du patient");
-            alert.showAndWait();    
-        }else if(txt_trait.getText().equals("")){
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setHeaderText(null);
-            alert.setContentText("Vous devez entrez le traitement du maladie de patient");
-            alert.showAndWait();   
-        }else if(txt_px.getText().equals("")){
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setHeaderText(null);
-            alert.setContentText("Vous devez entrez le prix de consultation");
-            alert.showAndWait();     
-        }else if(txt_obsv.getText().equals("")){
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setHeaderText(null);
-            alert.setContentText("Vous devez entrez votre observation sur maladie et/ou patient");
-            alert.showAndWait();      
-        }
-        
-        else{     
+            alert.showAndWait();        
+        }else{     
             Consultation c = new Consultation(Float.parseFloat(txt_poid.getText()),Float.parseFloat(txt_taill.getText()),
                     Float.parseFloat(txt_imc.getText()), Float.parseFloat(txt_temp.getText()),
                     Float.parseFloat(txt_px.getText()), Float.parseFloat(txt_press.getText()),
@@ -194,7 +133,7 @@ public class ModifierConsultationController implements Initializable {
             stage2.setScene(scene);
             stage2.show();
     }
-    // ************************** buton reset *********************
+        // ************************** buton reset *********************
     @FXML
     private void Reset (ActionEvent event)  {
     
@@ -210,5 +149,6 @@ public class ModifierConsultationController implements Initializable {
         txt_px.setText("");
         txt_obsv.setText("");
     }
+    
     
 }

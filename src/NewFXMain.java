@@ -15,7 +15,6 @@ public class NewFXMain extends Application {
         try {
             Parent root = FXMLLoader.load(getClass().getResource("./gui/MedecinDashbord.fxml"));
             Scene scene = new Scene(root);
-            //AfficherPlanningController controller = loader.getController();
 
             primaryStage.setScene(scene);
             primaryStage.setTitle("Medcare");

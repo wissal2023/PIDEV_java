@@ -10,7 +10,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" prefHeight="554.0" prefWidth="509.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.AjouterConsultationController">
+<AnchorPane id="AnchorPane" prefHeight="554.0" prefWidth="509.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AjouterConsultationController">
    <children>
       <Label layoutX="141.0" layoutY="14.0" text="Ajouter Consultation" textAlignment="CENTER" textFill="#009688" underline="true">
          <font>

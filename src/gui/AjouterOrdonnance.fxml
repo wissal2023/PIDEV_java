@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.TilePane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane id="AnchorPane" prefHeight="520.0" prefWidth="419.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AjouterOrdonnanceController">
+    <children>
+      <Label layoutX="83.0" layoutY="14.0" text="Ajouter Ordonnance" textAlignment="CENTER" textFill="#009688" underline="true">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Button id="btn_valider" fx:id="btn_valider" layoutX="241.0" layoutY="468.0" mnemonicParsing="false" onAction="#Valider" prefHeight="17.0" prefWidth="94.0" text="valider" />
+      <Button fx:id="BT_reset" layoutX="85.0" layoutY="468.0" mnemonicParsing="false" onAction="#Reset" prefHeight="25.0" prefWidth="94.0" text="reset" />
+      <TilePane layoutX="14.0" layoutY="68.0" prefHeight="86.0" prefWidth="236.0">
+         <children>
+            <Label text="Nom" />
+            <TextField fx:id="txt_nom" prefHeight="25.0" prefWidth="102.0" />
+            <Label text="Num CIN" />
+            <TextField fx:id="txt_cin" prefHeight="25.0" prefWidth="102.0" />
+            <Label text="Num tel" />
+            <TextField fx:id="txt_tel" prefHeight="25.0" prefWidth="102.0" />
+         </children>
+      </TilePane>
+      <Text layoutX="14.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Patient:">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Text>
+      <VBox layoutX="17.0" layoutY="178.0" prefHeight="264.0" prefWidth="385.0">
+         <children>
+            <HBox prefHeight="36.0" prefWidth="385.0">
+               <children>
+                  <Label prefHeight="30.0" prefWidth="135.0" text="Code Ordonnance" />
+                  <TextField fx:id="txt_codeOrd" prefHeight="31.0" prefWidth="233.0" />
+               </children>
+            </HBox>
+            <HBox prefHeight="36.0" prefWidth="385.0">
+               <children>
+                  <Label prefHeight="30.0" prefWidth="135.0" text="Description" />
+                  <TextField fx:id="txt_desc" prefHeight="31.0" prefWidth="233.0" />
+               </children>
+            </HBox>
+            <HBox prefHeight="36.0" prefWidth="385.0">
+               <children>
+                  <Label prefHeight="30.0" prefWidth="135.0" text="Medicament" />
+                  <TextField fx:id="txt_med" prefHeight="31.0" prefWidth="233.0" />
+               </children>
+            </HBox>
+            <HBox prefHeight="36.0" prefWidth="385.0">
+               <children>
+                  <Label prefHeight="30.0" prefWidth="135.0" text="Dosage" />
+                  <TextField fx:id="txt_dos" prefHeight="31.0" prefWidth="233.0" />
+               </children>
+            </HBox>
+            <HBox prefHeight="36.0" prefWidth="385.0">
+               <children>
+                  <Label prefHeight="30.0" prefWidth="135.0" text="Nombre de jour" />
+                  <TextField fx:id="txt_nbr" prefHeight="31.0" prefWidth="233.0" />
+               </children>
+            </HBox>
+            <HBox prefHeight="36.0" prefWidth="385.0">
+               <children>
+                  <Label prefHeight="30.0" prefWidth="135.0" text="Date consultation/RDV" />
+                  <TextField fx:id="txt_date" prefHeight="31.0" prefWidth="233.0" />
+               </children>
+            </HBox>
+            <HBox prefHeight="36.0" prefWidth="385.0">
+               <children>
+                  <Label prefHeight="30.0" prefWidth="135.0" text="Consultation de:" />
+                  <ChoiceBox fx:id="ch_trai" prefHeight="33.0" prefWidth="232.0" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+      <ImageView fitHeight="95.0" fitWidth="147.0" layoutX="253.0" layoutY="60.0" pickOnBounds="true" preserveRatio="true" />
+   </children>    
+</AnchorPane>

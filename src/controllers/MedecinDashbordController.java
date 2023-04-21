@@ -58,9 +58,7 @@ public class MedecinDashbordController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
-        // image = new Image(getClass().getResourceAsStream("imgDoc.jpg"));
-       // imgDoc.setImage(image);       
+              
         //nb_Med.setText("0");
         String query = "SELECT u.nom, u.specialite, u.adresse, u.email, u.num_tel, u.image FROM User u WHERE u.roles LIKE '[\"medcin\"]' ";
         try {
@@ -91,6 +89,7 @@ public class MedecinDashbordController implements Initializable {
         } catch(SQLException ex) {
             System.out.println("Error while fetching doctor information: " + ex.getMessage());
         }
+        //******* stat*****
         try {
             String queryStat = "SELECT COUNT(*) AS nbConsultations, SUM(prix) AS totalPrix FROM consultation";
             pste = cnx.prepareStatement(queryStat);
@@ -104,7 +103,7 @@ public class MedecinDashbordController implements Initializable {
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
-        
+//------- chart -------
        try {
             String queryChartData = "SELECT date, COUNT(*) AS nbConsultations FROM rendez_vous GROUP BY date";
             pste = cnx.prepareStatement(queryChartData);
@@ -129,7 +128,7 @@ public class MedecinDashbordController implements Initializable {
     @FXML
     private void afficherConsultation(ActionEvent event) throws IOException {
         
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("./gui/AfficherConsultation.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/AfficherConsultation.fxml"));
         Parent root = loader.load();
         Stage stage = new Stage();
         stage.setScene(new Scene(root));
