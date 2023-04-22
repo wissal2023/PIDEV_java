@@ -81,7 +81,7 @@ public class AfficherConsultationController implements Initializable {
     @FXML
     private Button BT_AjoutOrd;
    
-    
+    private Consultation selectedConsultation;
     private final Connection cnx;
     private PreparedStatement pste;
     
@@ -106,15 +106,14 @@ public class AfficherConsultationController implements Initializable {
         px.setCellValueFactory(new PropertyValueFactory<>("prix"));
         table_consult.getItems().setAll(listConsultation);
         
-         table_consult.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+        table_consult.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
         if (newSelection != null) {
-            // Enable the "AjouterOrdonnance" button when a row is selected
             BT_AjoutOrd.setDisable(false);
+            selectedConsultation = newSelection;// Update the selectedConsultation variable
         } else {
-            // Disable the "AjouterOrdonnance" button when no row is selected
-            BT_AjoutOrd.setDisable(true);
-        }
-    });
+            BT_AjoutOrd.setDisable(true);// Disable the "AjouterOrdonnance" button when no row is selected
+            selectedConsultation = null;         // Set the selectedConsultation variable to null
+        }});
         
         List<Ordonnance> listOrdonnance ;
         OrdonnanceService ordnltServ = new OrdonnanceService();
@@ -172,6 +171,27 @@ public class AfficherConsultationController implements Initializable {
     @FXML
     private void ajouterOrdonnance(ActionEvent event) throws IOException {
        
+        // Load the "AjouterOrdonnance" FXML file
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("AjouterOrdonnance.fxml"));
+        Parent root = loader.load();
+        // Get the controller of the new window
+        AjouterOrdonnanceController controller = loader.getController();
+        // Pass the selected consultation to the controller
+        controller.setSelectedConsultation(selectedConsultation);
+        // Show the new window
+        Stage stage = new Stage();
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.showAndWait();
+
+        // Refresh the consultation list in case the ordonnance was added to the selected consultation
+        List<Consultation> listConsultation ;
+        ConsultationService consultServ = new ConsultationService();
+        listConsultation= consultServ.showConsultation();
+        table_consult.getItems().setAll(listConsultation);
+        
+        
+       /* 
         Consultation selectedForAddOrd = table_consult.getSelectionModel().getSelectedItem();
         if (selectedForAddOrd != null) {
         // A consultation is selected, open the "AjouterOrdonnance.fxml" window
@@ -180,7 +200,8 @@ public class AfficherConsultationController implements Initializable {
         Stage stage = new Stage();
         stage.setScene(new Scene(root));
         stage.show();
-    }
+        }
+        */
     }
     
 

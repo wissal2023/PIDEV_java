@@ -55,17 +55,8 @@ public class AjouterOrdonnanceController implements Initializable {
     private Button btn_valider;
     @FXML
     private Button BT_reset;
-    
-    
-    private static Consultation selectedConsultation; // static variable to store the selected consultation
-    public static Consultation getSelectedConsultation() {
-        return selectedConsultation;
-    }
-    public static void setSelectedConsultation(Consultation consultation) {
-        selectedConsultation = consultation;
-    }
-    
-    
+   
+    private Consultation selectedConsultation;
     private final Connection cnx;
     private PreparedStatement ste;
     
@@ -76,19 +67,18 @@ public class AjouterOrdonnanceController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-   // retrieve the selected consultation from the previous window
-    Consultation selectedConsultation = AjouterOrdonnanceController.getSelectedConsultation();
-    // set the values of the text fields with data from the selected consultation
-    //Integer.parseInt(txt_nom.setId(selectedConsultation.getIdConslt()));//get the IdConslt from tab consultation and put it in the txt_nom field
-    txt_mal.setText(selectedConsultation.getMaladie());
-    txt_trait.setText(selectedConsultation.getTraitement());
-    dateRDV.setText(getRendezVous().getDate().toString());//get the date from the tab rendezvous 
-    hDebut.setText(getRendezVous().getHeureDebut().toString());// get the HeureDebut from the tab rendezvous 
-    
-//get the date and heureDebut of the selected consultation from the database from the rendezVous table         
-        dateRDV.getText(); 
-        hDebut.getText();
         
+       
+
+   /** retrieve the selected consultation from the previous window
+        Consultation selectedConsultation = AjouterOrdonnanceController.getSelectedConsultation();
+        set the values of the text fields with data from the selected consultation
+        txt_nom.setText(Integer.toString(selectedConsultation.getIdConslt()));
+        txt_mal.setText(selectedConsultation.getMaladie());
+        txt_trait.setText(selectedConsultation.getTraitement());
+        dateRDV.setText(getRendezVous().getDate().toString());//get the date from the tab rendezvous 
+        hDebut.setText(getRendezVous().getHeureDebut().toString());// get the HeureDebut from the tab rendezvous         
+*/
 //UUID.randomUUID() generates a unique identifier,substring is used to take only the first 10 characters
         String codeOrdonnance = UUID.randomUUID().toString().substring(0, 10);
         txt_codeOrd.setText(codeOrdonnance);
@@ -150,15 +140,8 @@ public class AjouterOrdonnanceController implements Initializable {
        
         String title = "succes ";
         String message = "Ordonnance ajouté avec succes";
-        
-        // open the "afficherConsultation" page
-          /*  FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/afficherConsultation.fxml"));
-            Parent root = loader.load();
-            Scene scene = new Scene(root);
-            Stage stage2 = new Stage();
-            stage2.setScene(scene);
-            stage2.show();*/
     }
+    
         // ************************** buton reset *********************
     @FXML
     private void Reset (ActionEvent event)  {
@@ -167,18 +150,17 @@ public class AjouterOrdonnanceController implements Initializable {
         txt_med.setText("");
         txt_dos.setText("");
         txt_nbr.setText("");
+    }    
+    
+    /*public void setSelectedConsultation(Consultation consultation) {
+        
+        this.selectedConsultation = consultation;
     }
+ */   
 
-    private RendezVous getRendezVous() {
-    // retrieve the selected consultation from the previous window
-    Consultation selectedConsultation = AjouterOrdonnanceController.getSelectedConsultation();
-    // get the id of the selected consultation
-    int idConslt = selectedConsultation.getIdConslt();
-    // get the RendezVous object from the database based on the consultation id
-    RendezVousService rendezVousService = new RendezVousService();
-    RendezVous rendezVous = rendezVousService.getRendezVousByIdConslt(idConslt);
-    return rendezVous;
+   public void setSelectedConsultation(Consultation consultation) {
+    
+       selectedConsultation = consultation;
+       
     }
-    
-    
 }
