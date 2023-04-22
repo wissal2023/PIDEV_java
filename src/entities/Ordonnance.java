@@ -4,38 +4,34 @@ import java.util.Date;
 
 public class Ordonnance {
     
-    private int id, nombre_jours;
-    private String medicaments, code_ordonnance, dosage, description ;
+    private int id, nombre_jours, dosage;
+    private String medicaments, code_ordonnance, description ;
     private Date date_de_creation, date_de_modification;
 
     public Ordonnance() {
     }
 
-    public Ordonnance(int id, int nombre_jours, String medicaments, String code_ordonnance, String description, Date date_de_creation, Date date_de_modification) {
+    public Ordonnance(int id, int nombre_jours, int dosage, String medicaments, String code_ordonnance, String description, Date date_de_creation, Date date_de_modification) {
         this.id = id;
         this.nombre_jours = nombre_jours;
+        this.dosage = dosage;
         this.medicaments = medicaments;
         this.code_ordonnance = code_ordonnance;
-        this.dosage = dosage;
         this.description = description;
         this.date_de_creation = date_de_creation;
         this.date_de_modification = date_de_modification;
     }
 
-    public Ordonnance(int id, int nombre_jours, String medicaments, String code_ordonnance, String description) {
-        this.id = id;
-        this.nombre_jours = nombre_jours;
-        this.medicaments = medicaments;
-        this.code_ordonnance = code_ordonnance;
-        this.description = description;
-    }
+    public Ordonnance(String description, String medicaments, int dosage, int nombre_jours) {
 
-    public Ordonnance(int id, String code_ordonnance, String description, Date date_de_creation) {
-        this.id = id;
-        this.code_ordonnance = code_ordonnance;
         this.description = description;
-        this.date_de_creation = date_de_creation;
+        this.medicaments = medicaments;
+        this.dosage = dosage;
+         this.nombre_jours = nombre_jours;
     }
+    
+    
+
 
     public int getId() {
         return id;
@@ -53,7 +49,7 @@ public class Ordonnance {
         return code_ordonnance;
     }
 
-    public String getDosage() {
+    public int getDosage() {
         return dosage;
     }
 
@@ -85,7 +81,7 @@ public class Ordonnance {
         this.code_ordonnance = code_ordonnance;
     }
 
-    public void setDosage(String dosage) {
+    public void setDosage(int dosage) {
         this.dosage = dosage;
     }
 

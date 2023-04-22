@@ -3,14 +3,9 @@ package entities;
 import java.util.Date;
 
 public class RendezVous {
-    private int idRdv;
-    private String symptomes;
-    private String etat;
-    private Date date;
-    private Date heureDebut;
-    private Date heureFin;
-    private int idPlanning;
-    private String fullName;
+    private int idRdv, idPlanning;
+    private String symptomes, etat, fullName;
+    private Date date, heureDebut,heureFin;
 
     public RendezVous() {
     } 

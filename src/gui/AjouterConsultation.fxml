@@ -2,15 +2,17 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.TilePane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" prefHeight="554.0" prefWidth="509.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AjouterConsultationController">
+<AnchorPane id="AnchorPane" prefHeight="554.0" prefWidth="486.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AjouterConsultationController">
    <children>
       <Label layoutX="141.0" layoutY="14.0" text="Ajouter Consultation" textAlignment="CENTER" textFill="#009688" underline="true">
          <font>
@@ -18,9 +20,9 @@
          </font>
       </Label>
       <Label layoutX="22.0" layoutY="209.0" text="poids" />
-      <Label layoutX="132.0" layoutY="209.0" text="taille" />
-      <Label layoutX="232.0" layoutY="209.0" text="imc" />
-      <Label layoutX="322.0" layoutY="209.0" text="temperature" />
+      <Label layoutX="136.0" layoutY="209.0" text="taille" />
+      <Label layoutX="263.0" layoutY="209.0" text="imc" />
+      <Label layoutX="352.0" layoutY="209.0" text="temperature" />
       <Label layoutX="398.0" layoutY="321.0" text="prix" />
       <Label layoutX="22.0" layoutY="265.0" text="pression arterielle" />
       <Label layoutX="178.0" layoutY="265.0" text="frequence cardiaque" />
@@ -30,10 +32,10 @@
       <Label layoutX="23.0" layoutY="369.0" text="observation" />
       <Button id="btn_valider" fx:id="btn_valider" layoutX="273.0" layoutY="483.0" mnemonicParsing="false" onAction="#Valider" prefHeight="17.0" prefWidth="94.0" text="valider" />
       <Button fx:id="BT_reset" layoutX="117.0" layoutY="483.0" mnemonicParsing="false" onAction="#Reset" prefHeight="25.0" prefWidth="94.0" text="reset" />
-      <TextField fx:id="txt_poid" layoutX="65.0" layoutY="205.0" prefHeight="25.0" prefWidth="42.0" />
+      <TextField fx:id="txt_poid" layoutX="54.0" layoutY="205.0" prefHeight="25.0" prefWidth="42.0" />
       <TextField fx:id="txt_taill" layoutX="164.0" layoutY="205.0" prefHeight="25.0" prefWidth="42.0" />
-      <TextField fx:id="txt_imc" layoutX="261.0" layoutY="205.0" prefHeight="25.0" prefWidth="42.0" />
-      <TextField fx:id="txt_temp" layoutX="398.0" layoutY="205.0" prefHeight="25.0" prefWidth="42.0" />
+      <TextField fx:id="txt_imc" disable="true" editable="false" layoutX="286.0" layoutY="205.0" prefHeight="25.0" prefWidth="42.0" />
+      <TextField fx:id="txt_temp" layoutX="419.0" layoutY="205.0" prefHeight="25.0" prefWidth="42.0" />
       <TextField fx:id="txt_press" layoutX="124.0" layoutY="261.0" prefHeight="25.0" prefWidth="42.0" />
       <TextField fx:id="txt_freq" layoutX="301.0" layoutY="261.0" prefHeight="25.0" prefWidth="42.0" />
       <TextField fx:id="txt_tx" layoutX="432.0" layoutY="261.0" prefHeight="25.0" prefWidth="42.0" />
@@ -41,22 +43,44 @@
       <TextField fx:id="txt_trait" layoutX="261.0" layoutY="317.0" prefHeight="25.0" prefWidth="109.0" />
       <TextField fx:id="txt_px" layoutX="432.0" layoutY="317.0" prefHeight="25.0" prefWidth="42.0" />
       <TextArea fx:id="txt_obsv" layoutX="27.0" layoutY="393.0" prefHeight="65.0" prefWidth="447.0" />
-      <TilePane layoutX="14.0" layoutY="66.0" prefHeight="120.0" prefWidth="225.0">
-         <children>
-            <RadioButton mnemonicParsing="false" text="New patient" />
-            <RadioButton mnemonicParsing="false" text="Old patient" />
-            <Label text="Nom" />
-            <TextField fx:id="txt_nom" prefHeight="25.0" prefWidth="102.0" />
-            <Label text="Num CIN" />
-            <TextField fx:id="txt_cin" prefHeight="25.0" prefWidth="102.0" />
-            <Label text="Num tel" />
-            <TextField fx:id="txt_tel" prefHeight="25.0" prefWidth="102.0" />
-         </children>
-      </TilePane>
       <Text layoutX="20.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Patient:">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
       </Text>
+      <ImageView fx:id="img" fitHeight="129.0" fitWidth="181.0" layoutX="283.0" layoutY="52.0" opacity="0.6" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../utils/clinic-7.jpg" />
+         </image>
+      </ImageView>
+      <VBox layoutX="27.0" layoutY="68.0" prefHeight="85.0" prefWidth="237.0">
+         <children>
+            <HBox prefHeight="17.0" prefWidth="238.0">
+               <children>
+                  <Label prefHeight="25.0" prefWidth="63.0" text="Num CIN" />
+                  <TextField fx:id="txt_cin" prefHeight="33.0" prefWidth="145.0" promptText="write the patients CIN" />
+               </children>
+            </HBox>
+            <HBox prefHeight="38.0" prefWidth="237.0">
+               <children>
+                  <Label prefHeight="25.0" prefWidth="63.0" text="Nom " />
+                  <TextField fx:id="txt_nom" prefHeight="25.0" prefWidth="145.0" />
+               </children>
+            </HBox>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Label prefHeight="25.0" prefWidth="63.0" text="Num tel" />
+                  <TextField fx:id="txt_tel" prefHeight="25.0" prefWidth="145.0" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+      <Text layoutX="13.0" layoutY="179.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Details Consultation:">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Text>
+      <Label layoutX="97.0" layoutY="209.0" text="Kg" />
+      <Label layoutX="207.0" layoutY="209.0" text="Metre" />
    </children>
 </AnchorPane>

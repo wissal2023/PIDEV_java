@@ -21,6 +21,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TableColumn;
@@ -35,6 +36,7 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import services.ConsultationService;
 import services.OrdonnanceService;
+import services.RendezVousService;
 import utils.MyConnection;
 
 
@@ -49,17 +51,20 @@ public class AfficherConsultationController implements Initializable {
     @FXML
     private TableView<Consultation> table_consult;
     @FXML
-    private TableColumn<RendezVous, Integer> patient_name;    
+    private TableColumn<RendezVous, Integer> patient_name;  
     @FXML
-    private TableColumn<Consultation, String> mal;    
-    @FXML
-    private TableColumn<Consultation, String> trait;    
+    private TableColumn<Consultation, String> poids;
+     @FXML
+    private TableColumn<Consultation, Float> taille; 
     @FXML
     private TableColumn<Consultation, String> temp; 
     @FXML
-    private TableColumn<Consultation, String> poids;
+    private TableColumn<Consultation, String> mal;    
     @FXML
-    private TableColumn<RendezVous, Date> date; 
+    private TableColumn<Consultation, String> trait; 
+    @FXML
+    private TableColumn<Consultation, Float> px;
+    
             //*************  Ordonnance *********
     @FXML
     private TableView<Ordonnance> tab_Ord;
@@ -73,6 +78,8 @@ public class AfficherConsultationController implements Initializable {
     private TableColumn<Ordonnance, Integer> nombre_jours;
     @FXML
     private TableColumn<Ordonnance, Date> date_de_creation;
+    @FXML
+    private Button BT_AjoutOrd;
    
     
     private final Connection cnx;
@@ -92,11 +99,22 @@ public class AfficherConsultationController implements Initializable {
         listConsultation= consultServ.showConsultation();
         patient_name.setCellValueFactory(new PropertyValueFactory<>("idConslt"));
         poids.setCellValueFactory(new PropertyValueFactory<>("poids"));
+        taille.setCellValueFactory(new PropertyValueFactory<>("taille"));
+        temp.setCellValueFactory(new PropertyValueFactory<>("temperature"));
         mal.setCellValueFactory(new PropertyValueFactory<>("maladie"));
         trait.setCellValueFactory(new PropertyValueFactory<>("traitement"));
-        temp.setCellValueFactory(new PropertyValueFactory<>("temperature"));
-        date.setCellValueFactory(new PropertyValueFactory<>("date"));//dateRDV 
+        px.setCellValueFactory(new PropertyValueFactory<>("prix"));
         table_consult.getItems().setAll(listConsultation);
+        
+         table_consult.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+        if (newSelection != null) {
+            // Enable the "AjouterOrdonnance" button when a row is selected
+            BT_AjoutOrd.setDisable(false);
+        } else {
+            // Disable the "AjouterOrdonnance" button when no row is selected
+            BT_AjoutOrd.setDisable(true);
+        }
+    });
         
         List<Ordonnance> listOrdonnance ;
         OrdonnanceService ordnltServ = new OrdonnanceService();
@@ -140,8 +158,7 @@ public class AfficherConsultationController implements Initializable {
     }
     */
     
-//---------------------------------------- buton ajouter -------------------------------------------
-    
+//---------------------------------------- buton ajouter -------------------------------------------   
     @FXML
     private void AjouterConsultation(ActionEvent event) throws IOException {
        
@@ -153,13 +170,17 @@ public class AfficherConsultationController implements Initializable {
     }
     
     @FXML
-    private void AjouterOrdonnance(ActionEvent event) throws IOException {
+    private void ajouterOrdonnance(ActionEvent event) throws IOException {
        
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/AjouterOrdonnance.fxml"));
+        Consultation selectedForAddOrd = table_consult.getSelectionModel().getSelectedItem();
+        if (selectedForAddOrd != null) {
+        // A consultation is selected, open the "AjouterOrdonnance.fxml" window
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/AjouterOrdonnance.fxml")); 
         Parent root = loader.load();
         Stage stage = new Stage();
         stage.setScene(new Scene(root));
         stage.show();
+    }
     }
     
 
@@ -252,104 +273,9 @@ public class AfficherConsultationController implements Initializable {
         try (FileOutputStream fileOut = new FileOutputStream(filePath) // Save the workbook to the specified file path
         ) {
             workbook.write(fileOut);
-            // Close the workbook
+            fileOut.close();
+
         }
     }
        
-        
-    /*  ************************First method******************************  
-     
-        
-        
-        ************************************************SECOND METHOD***************************************
-        
-        try {
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Save Consultations to Excel File");
-        fileChooser.setInitialFileName("List Consultations.xlsx");// Set the default file name
-        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Excel Files", "*.xlsx"));
-        File file = fileChooser.showSaveDialog(null);
-
-        if (file != null) {
-            try (XSSFWorkbook workbook = new XSSFWorkbook()) {
-                XSSFSheet sheet = workbook.createSheet("Consultations");
-                
-                ObservableList<Consultation> consultations = table_consult.getItems();
-                
-                // Create header row
-                XSSFRow headerRow = sheet.createRow(0);
-                headerRow.createCell(0).setCellValue("id");
-                headerRow.createCell(1).setCellValue("Temperature");
-                headerRow.createCell(2).setCellValue("Maladie");
-                headerRow.createCell(3).setCellValue("Traitement");
-                
-                // Create data rows
-                int rowIndex = 1;
-                
-                for (Consultation consultation : consultations) {
-                    XSSFRow dataRow = sheet.createRow(rowIndex++);
-                        dataRow.createCell(0).setCellValue("id");
-                        dataRow.createCell(1).setCellValue("Temperature");
-                        dataRow.createCell(2).setCellValue("Maladie");
-                        dataRow.createCell(3).setCellValue("Traitement");
-                        dataRow.createCell(4).setCellValue("Prix");
-                }
-                
-                try (FileOutputStream fileOut = new FileOutputStream(file)) {
-                    workbook.write(fileOut);
-                }
-            }
-}
-        } catch (IOException e) {
-            System.out.println("this is the error msg " +e.getMessage());
-        }
-        
-   ****************************THIRD METHOD *****************************
-         try {
-            String query = " Select * from consultation";
-            pste = cnx.prepareStatement(query);
-            try (ResultSet rs = pste.executeQuery()) {
-                XSSFWorkbook workbook = new XSSFWorkbook();
-                XSSFSheet sheet = workbook.createSheet("Consultations");
-                XSSFRow headerRow = sheet.createRow(0);
-                headerRow.createCell(0).setCellValue("id");
-                headerRow.createCell(1).setCellValue("Temperature");
-                headerRow.createCell(2).setCellValue("Maladie");
-                headerRow.createCell(3).setCellValue("Traitement");
-            
-                sheet.autoSizeColumn(1);
-                sheet.setZoom(150);
-                
-                int indx = 1;
-                while(rs.next()){
-                    XSSFRow dataRow = sheet.createRow(indx);
-                    dataRow.createCell(0).setCellValue(rs.getString("id"));
-                    dataRow.createCell(1).setCellValue(rs.getString("Temperature"));
-                    dataRow.createCell(2).setCellValue(rs.getString("Maladie"));
-                    dataRow.createCell(3).setCellValue(rs.getString("Traitement"));
-                    indx++;                
-                }
-                try (FileOutputStream fileOut = new FileOutputStream("listConsultation.xlsx")) {
-                    workbook.write(fileOut);
-                }
-                
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("telechargement");
-                alert.setHeaderText(null);
-                alert.setContentText("Consultation exporté avec succes");
-                alert.showAndWait();
-                
-                pste.close();
-            }
-                
-        } catch (SQLException | IOException ex) {
-            System.out.println(ex.getMessage());
-        }
-
-  }        
-*/
-        
-    
-
-
 }

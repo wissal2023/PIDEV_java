@@ -19,6 +19,7 @@ public class User {
     private Date date_de_creation;
     private String roles;
     private String Image;
+    private String cin;
 
 
     public User() {
@@ -29,7 +30,14 @@ public class User {
         this.nom = nom;
         this.prenom = prenom;
     }
+
+    public User(String nom, String tel, String cin) {
+        this.nom = nom;
+        this.tel = tel;
+        this.cin = cin;
+    }
     
+
     
      public User(int id,String image) {
         this.id=id;
@@ -121,6 +129,14 @@ public class User {
 
     public int getId() {
         return id;
+    }
+
+    public void setCin(String cin) {
+        this.cin = cin;
+    }
+
+    public String getCin() {
+        return cin;
     }
 
     public void setId(int id) {

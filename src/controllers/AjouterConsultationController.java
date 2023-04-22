@@ -4,6 +4,8 @@ import entities.Consultation;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -13,27 +15,24 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 import services.ConsultationService;
 import utils.MyConnection;
 
 public class AjouterConsultationController implements Initializable {
 
-    /*
+    @FXML
+    private TextField txt_cin;
     @FXML
     private TextField txt_nom;
-
     @FXML
     private TextField txt_tel;
 
-    @FXML
-    private TextField txt_cin;
-    */
-    
-     
     @FXML
     private TextField txt_poid;
 
@@ -82,39 +81,78 @@ public class AjouterConsultationController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-       // txt_nom.setText("John Doe");
-       // txt_tel.setText("23456789");
-       // txt_cin.setText("12345678");
-       //NumConslt.setText("72");
-       
-        
-    }  
-        // ************************** buton valider *********************
+ 
+// event when writing the cin of the patient it will show the patient name 
+    txt_cin.setOnKeyPressed(event -> {
+        if (event.getCode() == KeyCode.ENTER) {
+            String cin = txt_cin.getText();
+            try {
+                // Retrieve patient information from the database using the CIN entered
+                String query = "SELECT u.nom, u.num_tel FROM user u WHERE u.roles LIKE '[\"patient\"]' AND u.cin = ?";
+                PreparedStatement preparedStatement = cnx.prepareStatement(query);
+                preparedStatement.setString(1, cin);
+                ResultSet resultSet = preparedStatement.executeQuery();
+                if (resultSet.next()) {
+                    String nom = resultSet.getString("nom");
+                    String tel = resultSet.getString("num_tel");
+                    txt_nom.setText(nom);
+                    txt_tel.setText(tel);
+                } else {
+                    // Alert Patient not found
+                    Alert alert = new Alert(AlertType.WARNING);
+                    alert.setTitle("Patient not found");
+                    alert.setContentText("Patient not found in the database.");
+                    alert.showAndWait();
+                    txt_nom.clear();
+                    txt_tel.clear();
+                }
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
+    });
     
-    //control de saisie
+    //event to calculate the imc after entering the values of poid and taille
+        txt_poid.textProperty().addListener((observable, oldValue, newValue) -> {
+        if (!newValue.isEmpty() && !txt_taill.getText().isEmpty()) {
+            calculateIMC();
+        }});
+        txt_taill.textProperty().addListener((observable, oldValue, newValue) -> {
+        if (!newValue.isEmpty() && !txt_poid.getText().isEmpty()) {
+            calculateIMC();
+        } });
+
+}    
+    private void calculateIMC() {
+        try {
+            float poid = Float.parseFloat(txt_poid.getText());
+            float tail = Float.parseFloat(txt_taill.getText());
+            if (poid <= 0 || tail <= 0) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setHeaderText(null);
+                alert.setContentText("Les valeurs de poids et taille doivent être positives et non nulles.");
+                alert.showAndWait();
+                return;
+                }
+                double imc = poid / (tail * tail);
+                String imcString = String.format("%.2f", imc);
+                imcString = imcString.replace(',', '.'); // replace comma with period
+                txt_imc.setText(imcString);
+            }catch (NumberFormatException e) {
+                // Show an error message if the entered values are not numeric
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setHeaderText(null);
+                alert.setContentText("Les valeurs de poids et taille doivent être des nombres.");
+                alert.showAndWait();
+            }
+}
+    
+    
+// ******************** buton valider ************ +  control de saisie *********
     @FXML
     private void Valider(ActionEvent event) throws Exception {
        try{
-        if(txt_poid.getText().equals("")){
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setHeaderText(null);
-            alert.setContentText("Vous devez entrez le poids du patient");
-            alert.showAndWait(); 
-        }else if(txt_taill.getText().equals("")){
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setHeaderText(null);
-            alert.setContentText("Vous devez entrez la taille du patient");
-            alert.showAndWait(); 
-        }else if(txt_imc.getText().equals("")){
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setHeaderText(null);
-            alert.setContentText("Vous devez entrez l'imc du patient");
-            alert.showAndWait(); 
-        }else if(txt_temp.getText().equals("")){
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setHeaderText(null);
-            alert.setContentText("Vous devez entrez la température du patient");
-            alert.showAndWait();  
+        if(txt_poid.getText().equals("") && (txt_taill.getText().equals("")) && (txt_imc.getText().equals(""))) {   
         }else if(txt_press.getText().equals("")){
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setHeaderText(null);
@@ -150,15 +188,13 @@ public class AjouterConsultationController implements Initializable {
             alert.setHeaderText(null);
             alert.setContentText("Vous devez entrez votre observation sur maladie et/ou patient");
             alert.showAndWait();      
-        }
-        
-        else{     
+        }else{     
             Consultation c = new Consultation(Float.parseFloat(txt_poid.getText()),Float.parseFloat(txt_taill.getText()),
-                    Float.parseFloat(txt_imc.getText()), Float.parseFloat(txt_temp.getText()),
-                    Float.parseFloat(txt_px.getText()), Float.parseFloat(txt_press.getText()),
-                    Float.parseFloat(txt_freq.getText()), Float.parseFloat(txt_tx.getText()),
-                    txt_mal.getText(), txt_trait.getText(),txt_obsv.getText());
-            
+            Float.parseFloat(txt_imc.getText()), Float.parseFloat(txt_temp.getText()),
+            Float.parseFloat(txt_px.getText()), Float.parseFloat(txt_press.getText()),
+            Float.parseFloat(txt_freq.getText()), Float.parseFloat(txt_tx.getText()),
+            txt_mal.getText(), txt_trait.getText(),txt_obsv.getText());
+
             ConsultationService consultService = new ConsultationService();
             consultService.ajouterConsultation(c);
             
@@ -167,21 +203,17 @@ public class AjouterConsultationController implements Initializable {
             alert.setHeaderText(null);
             alert.setContentText("Consultation ajouté avec succès");
             alert.showAndWait();
-            
             // close the current window
             Stage stage = (Stage) btn_valider.getScene().getWindow();
             stage.close();
-             
         }
-       }
-        catch(Exception ex){
-            Alert alert = new Alert(Alert.AlertType.ERROR," Les informations sont Invalides ou incompletes Veuillez les verifiers ",ButtonType.CLOSE);
-            alert.showAndWait();
+            
+       }catch(Exception ex){
+           Alert alert = new Alert(Alert.AlertType.ERROR," Les informations sont Invalides ou incompletes, Veuillez les verifiers ",ButtonType.CLOSE);
+           alert.showAndWait();
         }
-       
         String title = "succes ";
-        String message = "Consultation ajouté avec succes";
-        
+        String message = "Consultation ajouté avec succes";        
         // open the "afficherConsultation" page
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/afficherConsultation.fxml"));
             Parent root = loader.load();
@@ -190,6 +222,7 @@ public class AjouterConsultationController implements Initializable {
             stage2.setScene(scene);
             stage2.show();
     }
+    
         // ************************** buton reset *********************
     @FXML
     private void Reset (ActionEvent event)  {
@@ -207,5 +240,8 @@ public class AjouterConsultationController implements Initializable {
         txt_obsv.setText("");
     }
     
+   
     
 }
+
+

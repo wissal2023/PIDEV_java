@@ -36,7 +36,7 @@ public class OrdonnanceService {
             pStmt.setInt(1, ord.getNombre_jours());
             pStmt.setString(2, ord.getMedicaments());
             pStmt.setString(3, ord.getCode_ordonnance());
-            pStmt.setString(4, ord.getDosage());
+            pStmt.setInt(4, ord.getDosage());
             //pStmt.setString(5, ord.getQrCodeFilename());
             pStmt.setString(6, ord.getDescription());
             pStmt.setDate(7, dateCreation);
@@ -65,7 +65,7 @@ public class OrdonnanceService {
         pStmt.setInt(1, ord.getNombre_jours());
         pStmt.setString(2, ord.getMedicaments());
         pStmt.setString(3, ord.getCode_ordonnance());
-        pStmt.setString(4, ord.getDosage());
+        pStmt.setInt(4, ord.getDosage());
         //pStmt.setString(5, ord.getQrCodeFilename());
         pStmt.setString(6, ord.getDescription());
         pStmt.setDate(7, dateCreation);
@@ -94,7 +94,7 @@ public class OrdonnanceService {
             ord.setNombre_jours(rs.getInt("nombre_jours"));
             ord.setMedicaments(rs.getString("medicaments"));
             ord.setCode_ordonnance(rs.getString("code_ordonnance"));
-            ord.setDosage(rs.getString("dosage"));
+            ord.setDosage(rs.getInt("dosage"));
         //    ord.setQrCodeFilename(rs.getString("qrCodeFilename"));
             ord.setDescription(rs.getString("description"));
             ord.setDate_de_creation(rs.getDate("date_de_creation"));
