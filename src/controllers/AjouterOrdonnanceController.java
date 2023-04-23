@@ -30,7 +30,7 @@ import utils.MyConnection;
 public class AjouterOrdonnanceController implements Initializable {
 
     @FXML
-    private TextField txt_nom;
+    private TextField txt_id;
     @FXML
     private TextField txt_mal;
     @FXML
@@ -67,32 +67,19 @@ public class AjouterOrdonnanceController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+         
+        if (selectedConsultation != null) {
+            txt_id.setText(String.valueOf(selectedConsultation.getIdConslt()));
+            txt_mal.setText(selectedConsultation.getMaladie());
+            txt_trait.setText(selectedConsultation.getTraitement());
+        }
         
-       
-
-   /** retrieve the selected consultation from the previous window
-        Consultation selectedConsultation = AjouterOrdonnanceController.getSelectedConsultation();
-        set the values of the text fields with data from the selected consultation
-        txt_nom.setText(Integer.toString(selectedConsultation.getIdConslt()));
-        txt_mal.setText(selectedConsultation.getMaladie());
-        txt_trait.setText(selectedConsultation.getTraitement());
-        dateRDV.setText(getRendezVous().getDate().toString());//get the date from the tab rendezvous 
-        hDebut.setText(getRendezVous().getHeureDebut().toString());// get the HeureDebut from the tab rendezvous         
-*/
 //UUID.randomUUID() generates a unique identifier,substring is used to take only the first 10 characters
         String codeOrdonnance = UUID.randomUUID().toString().substring(0, 10);
         txt_codeOrd.setText(codeOrdonnance);
    
     }    
     
-    /*     RendezVous rdv = new RendezVous();// fetch the RendezVous object from somewhere
-        Date date = rdv.getDate();
-        Date heureDebut = rdv.getHeureDebut();
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        String dateString = dateFormat.format(date);
-        String heureDebutString = dateFormat.format(heureDebut);
-        txt_date.setText(dateString + " " + heureDebutString);
-*/
     @FXML
     private void Valider(ActionEvent event) throws Exception {
        try{
@@ -126,16 +113,14 @@ public class AjouterOrdonnanceController implements Initializable {
             alert.setTitle("AJOUT ORDONNANCE AVEC SUCCES");
             alert.setHeaderText(null);
             alert.setContentText("ordonnance ajouté au consultation avec succès");
-            alert.showAndWait();            
-            // close the current window
+            alert.showAndWait();        
             Stage stage = (Stage) btn_valider.getScene().getWindow();
             stage.close();
              
         }
        }
         catch(Exception ex){
-            Alert alert = new Alert(Alert.AlertType.ERROR," Les informations sont Invalides ou incompletes Veuillez les verifiers ",ButtonType.CLOSE);
-            alert.showAndWait();
+            ex.printStackTrace();
         }
        
         String title = "succes ";
@@ -150,17 +135,14 @@ public class AjouterOrdonnanceController implements Initializable {
         txt_med.setText("");
         txt_dos.setText("");
         txt_nbr.setText("");
-    }    
-    
-    /*public void setSelectedConsultation(Consultation consultation) {
-        
-        this.selectedConsultation = consultation;
-    }
- */   
+    }     
 
    public void setSelectedConsultation(Consultation consultation) {
     
-       selectedConsultation = consultation;
+       //selectedConsultation = consultation;
+       txt_id.setText(Integer.toString(consultation.getIdConslt()));
+        txt_mal.setText(consultation.getMaladie());
+        txt_trait.setText(consultation.getTraitement());
        
     }
 }

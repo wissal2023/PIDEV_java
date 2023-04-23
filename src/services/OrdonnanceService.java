@@ -27,8 +27,8 @@ public class OrdonnanceService {
       
         String request="INSERT INTO ordonnance (nombre_jours, medicaments, code_ordonnance, dosage,qrCodeFilename, description, date_de_creation, date_de_modification)"
                 +"VALUES(?,?,?,?,?,?,?,?) ";
-        Date dateCreation = new Date(ord.getDate_de_creation().getTime());
-        Date dateModification = new Date(ord.getDate_de_modification().getTime());
+        //Date dateCreation = new Date(ord.getDate_de_creation().getTime());
+        //Date dateModification = new Date(ord.getDate_de_modification().getTime());
         //System.out.println(c.getPoids());
 
        try {
@@ -38,9 +38,9 @@ public class OrdonnanceService {
             pStmt.setString(3, ord.getCode_ordonnance());
             pStmt.setInt(4, ord.getDosage());
             //pStmt.setString(5, ord.getQrCodeFilename());
-            pStmt.setString(6, ord.getDescription());
-            pStmt.setDate(7, dateCreation);
-            pStmt.setDate(8, dateModification);
+            pStmt.setString(5, ord.getDescription());
+           // pStmt.setDate(7, dateCreation);
+           // pStmt.setDate(8, dateModification);
             pStmt.executeUpdate();
             pStmt.close();
             System.out.println ("succes"); 

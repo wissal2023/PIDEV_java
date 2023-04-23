@@ -74,12 +74,11 @@ public class FicheMedicaleService {
         
     }
 
-// --------------------------------afficher---------------------------------------------------
+// --------------------------------afficher fiche medicale service---------------------------------------------------
     public List<FicheMedicale> showFicheMedicale() {
         
     List<FicheMedicale> FicheMedicales = new ArrayList<>();
     String request = "SELECT * FROM FicheMedicale";
-//description, String allergies, String pathologie, Date date_de_creation, Date date_de_modification
 
     try {
         pStmt = cnx.prepareStatement(request);

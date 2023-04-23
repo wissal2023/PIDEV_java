@@ -27,6 +27,9 @@ import javafx.scene.control.TabPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -65,7 +68,7 @@ public class AfficherConsultationController implements Initializable {
     @FXML
     private TableColumn<Consultation, Float> px;
     
-            //*************  Ordonnance *********
+    //*************  Ordonnance *********
     @FXML
     private TableView<Ordonnance> tab_Ord;
     @FXML
@@ -80,7 +83,13 @@ public class AfficherConsultationController implements Initializable {
     private TableColumn<Ordonnance, Date> date_de_creation;
     @FXML
     private Button BT_AjoutOrd;
+    
+    //*************  Fich medicale *********
+    @FXML
+    private AnchorPane anch_fiche;
    
+    
+    
     private Consultation selectedConsultation;
     private final Connection cnx;
     private PreparedStatement pste;
@@ -93,7 +102,7 @@ public class AfficherConsultationController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
+        // ----------------tab consultation ---------------
         List<Consultation> listConsultation ;
         ConsultationService consultServ = new ConsultationService();
         listConsultation= consultServ.showConsultation();
@@ -115,6 +124,7 @@ public class AfficherConsultationController implements Initializable {
             selectedConsultation = null;         // Set the selectedConsultation variable to null
         }});
         
+        // ----------------tab ordonnance ---------------
         List<Ordonnance> listOrdonnance ;
         OrdonnanceService ordnltServ = new OrdonnanceService();
         listOrdonnance= ordnltServ.showOrdonnance();        
@@ -125,37 +135,19 @@ public class AfficherConsultationController implements Initializable {
         date_de_creation.setCellValueFactory(new PropertyValueFactory<>("date_de_creation"));
         tab_Ord.getItems().setAll(listOrdonnance);
         
-        /*
-        List<RendezVous> listRendezVous ;
-        RendezVousService rdvServ = new RendezVousService();
-        listRendezVous= rdvServ.showRendezVous();        
-        date.setCellValueFactory(new PropertyValueFactory<>("date")); 
+        // ----------------tab fich medicale ---------------
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/gui/card.fxml"));
+        VBox card = null;
+        try {
+            card = fxmlLoader.load();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+        // add the card to the AnchorPane in the ScrollPane
+        anch_fiche.getChildren().add(card);
         
-        List<User> listUser ;
-        UserService userServ = new UserService();
-        listUser= rdvServ.showUser();        
-        name.setCellValueFactory(new PropertyValueFactory<>("nom")); 
-        */
     }
 
-    /*
-    @FXML
-    void AfficherConsultationController(ActionEvent event) {
-       
-        List<Consultation> listConsultation ;
-        ConsultationService consultServ = new ConsultationService();
-        listConsultation = consultServ.showConsultation();
-
-        patient_name.setCellValueFactory(new PropertyValueFactory<>("patient_id"));    
-        mal.setCellValueFactory(new PropertyValueFactory<>("maladie"));
-        trait.setCellValueFactory(new PropertyValueFactory<>("traitement"));
-        temp.setCellValueFactory(new PropertyValueFactory<>("temperature"));
-        date.setCellValueFactory(new PropertyValueFactory<>("date"));
-        
-        table_consult.getItems().setAll(listConsultation);
-
-    }
-    */
     
 //---------------------------------------- buton ajouter -------------------------------------------   
     @FXML
@@ -171,43 +163,25 @@ public class AfficherConsultationController implements Initializable {
     @FXML
     private void ajouterOrdonnance(ActionEvent event) throws IOException {
        
-        // Load the "AjouterOrdonnance" FXML file
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("AjouterOrdonnance.fxml"));
-        Parent root = loader.load();
-        // Get the controller of the new window
-        AjouterOrdonnanceController controller = loader.getController();
-        // Pass the selected consultation to the controller
+        
+        Consultation selectedForEdit = table_consult.getSelectionModel().getSelectedItem();
+        
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/AjouterOrdonnance.fxml"));
+        Parent parent = loader.load();
+        AjouterOrdonnanceController controller = (AjouterOrdonnanceController) loader.getController();
         controller.setSelectedConsultation(selectedConsultation);
-        // Show the new window
-        Stage stage = new Stage();
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.showAndWait();
-
-        // Refresh the consultation list in case the ordonnance was added to the selected consultation
-        List<Consultation> listConsultation ;
-        ConsultationService consultServ = new ConsultationService();
-        listConsultation= consultServ.showConsultation();
-        table_consult.getItems().setAll(listConsultation);
-        
-        
-       /* 
-        Consultation selectedForAddOrd = table_consult.getSelectionModel().getSelectedItem();
-        if (selectedForAddOrd != null) {
-        // A consultation is selected, open the "AjouterOrdonnance.fxml" window
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/AjouterOrdonnance.fxml")); 
-        Parent root = loader.load();
-        Stage stage = new Stage();
-        stage.setScene(new Scene(root));
+        Stage stage = new Stage(StageStyle.DECORATED);
+        stage.setTitle("Ajouter Ordonnance");
+        stage.setScene(new Scene(parent));
         stage.show();
-        }
-        */
+  
     }
     
 
 //----------------------------------------- buton modifier --------------------------------------------
     @FXML
     private void editerConsultation(ActionEvent event) throws IOException {
+        
         Consultation selectedForEdit = table_consult.getSelectionModel().getSelectedItem();
         
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/ModifierConsultation.fxml"));
