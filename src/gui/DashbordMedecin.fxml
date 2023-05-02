@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" focusTraversable="true" prefHeight="600.0" prefWidth="989.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.DashbordMedecinController">
+    <children>
+        <Pane layoutX="1.0" layoutY="1.0" prefHeight="597.0" prefWidth="987.0" style="-fx-background-color: #ffff;">
+           <children>
+                <HBox alignment="CENTER_LEFT" layoutX="183.0" layoutY="7.0" prefHeight="51.0" prefWidth="559.0">
+                  <children>
+                     <Button mnemonicParsing="false" prefHeight="49.0" prefWidth="131.0" style="-fx-background-color: transparent;" text="Accueil">
+                          <font>
+                             <Font name="System Bold" size="12.0" />
+                          </font>
+                      </Button>
+                      <Button mnemonicParsing="false" prefHeight="53.0" prefWidth="131.0" style="-fx-background-color: transparent;" text="Médecins">
+                          <font>
+                             <Font name="System Bold" size="12.0" />
+                          </font>
+                      </Button>
+                      <Button mnemonicParsing="false" prefHeight="66.0" prefWidth="131.0" style="-fx-background-color: transparent;" text="Pharmacies">
+                          <font>
+                             <Font name="System Bold" size="12.0" />
+                          </font>
+                      </Button>
+                      <Button mnemonicParsing="false" prefHeight="68.0" prefWidth="131.0" style="-fx-background-color: transparent;" text="Doctoshop">
+                          <font>
+                             <Font name="System Bold" size="12.0" />
+                          </font>
+                      </Button>
+                    </children>
+                  </HBox>
+              <Button fx:id="button_login" layoutX="825.0" layoutY="12.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="143.0" style="-fx-background-color: #15558d;" styleClass="my-button" text="Se déconnecter" textFill="WHITE">
+                <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+               </Button>
+                <VBox alignment="TOP_CENTER" layoutX="-2.0" prefHeight="597.0" prefWidth="217.0" spacing="15.0" style="-fx-background-color: #ffff;">
+                 <children>
+                    <VBox alignment="TOP_CENTER" prefHeight="305.0" prefWidth="217.0">
+                        <VBox.margin>
+                           <Insets top="30.0" />
+                        </VBox.margin>
+                        <children>
+                        <HBox alignment="CENTER" prefHeight="142.0" prefWidth="217.0">
+                           <children>
+                                <ImageView fitHeight="136.0" fitWidth="105.0" pickOnBounds="true" preserveRatio="true">
+                                   <image>
+                                      <Image url="@../utils/imgDoc.jpg" />
+                                   </image>
+                                </ImageView>
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="32.0" prefWidth="217.0">
+                           <children>
+                                 <Label fx:id="username" alignment="CENTER" contentDisplay="CENTER" prefHeight="27.0" prefWidth="85.0" text="Nom" textFill="#1c19c9">
+                                    <font>
+                                       <Font name="System Bold" size="18.0" />
+                                    </font>
+                                 </Label>
+                                    <TextField fx:id="Txt_nom" alignment="CENTER" cache="true" editable="false" prefHeight="25.0" prefWidth="129.0" />
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="33.0" prefWidth="217.0">
+                           <children>
+                                    <Label alignment="CENTER" prefHeight="27.0" prefWidth="85.0" text="Spécialité" textFill="#1c19c9">
+                                 <font>
+                                    <Font name="System Bold" size="18.0" />
+                                 </font>
+                              </Label>
+                                    <TextField fx:id="Txt_special" alignment="CENTER" editable="false" prefHeight="25.0" prefWidth="129.0" />
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="32.0" prefWidth="217.0">
+                           <children>
+                                    <Label alignment="CENTER" prefHeight="27.0" prefWidth="85.0" text="Adresse" textFill="#1c19c9">
+                                 <font>
+                                    <Font name="System Bold" size="18.0" />
+                                 </font>
+                              </Label>
+                                    <TextField fx:id="Txt_adress" alignment="CENTER" editable="false" prefHeight="25.0" prefWidth="128.0" />
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="32.0" prefWidth="217.0">
+                           <children>
+                                    <Label alignment="CENTER" prefHeight="27.0" prefWidth="85.0" text="E-mail" textFill="#1c19c9">
+                                 <font>
+                                    <Font name="System Bold" size="18.0" />
+                                 </font>
+                              </Label>
+                                    <TextField fx:id="Txt_mail" alignment="CENTER" editable="false" prefHeight="25.0" prefWidth="129.0" />
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="32.0" prefWidth="217.0">
+                           <children>
+                                    <Label alignment="CENTER" prefHeight="27.0" prefWidth="85.0" text="Tel" textFill="#1c19c9">
+                                 <font>
+                                    <Font name="System Bold" size="18.0" />
+                                 </font>
+                              </Label>
+                                    <TextField fx:id="Txt_tel" alignment="CENTER" editable="false" prefHeight="25.0" prefWidth="129.0" />
+                           </children>
+                        </HBox>
+                        </children>
+                     </VBox>
+                     <VBox alignment="BOTTOM_CENTER" prefHeight="64.0" prefWidth="217.0">
+                     <children>
+                                <Button id="BT_Consult" fx:id="BT_afficher_consult" alignment="CENTER" onAction="#afficherConsultation" prefHeight="48.0" prefWidth="196.0" style="-fx-background-color: #a2fff9; -fx-background-radius: 20;" text="Consultation" textAlignment="CENTER">
+                                <font>
+                                  <Font size="18.0" />
+                                </font>
+                           <graphic>
+                              <FontAwesomeIconView fill="#05aba0" glyphName="BOOK" size="22" wrappingWidth="24.0" />
+                           </graphic>
+                                </Button>
+                     </children>
+                     </VBox>
+                 </children>
+                </VBox>
+                    <BarChart fx:id="barChart" alternativeColumnFillVisible="true" layoutX="214.0" layoutY="267.0" legendSide="RIGHT" prefHeight="312.0" prefWidth="762.0" title="Consultations par jours">
+                    <xAxis>
+                    <CategoryAxis side="BOTTOM" />
+                    </xAxis>
+                    <yAxis>
+                    <NumberAxis side="LEFT" />
+                    </yAxis>
+                    </BarChart>
+                      <VBox layoutX="236.0" layoutY="109.0" prefHeight="121.0" prefWidth="330.0">
+                      <children>
+                        <HBox prefHeight="57.0" prefWidth="330.0">
+                           <children>
+                              <Label prefHeight="45.0" prefWidth="265.0" text="Nombre total de Consultation">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font></Label>
+                              <TextField fx:id="nb_Tot_Consult" editable="false" prefHeight="30.0" prefWidth="60.0" />
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="45.0" prefWidth="338.0">
+                           <children>
+                              <Label prefHeight="35.0" prefWidth="265.0" text="Revenu d'aujourd'hui">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font></Label>
+                              <TextField fx:id="Rev" editable="false" prefHeight="30.0" prefWidth="60.0" />
+                           </children>
+                        </HBox>
+                      </children>
+                      </VBox>
+            <VBox layoutX="594.0" layoutY="103.0" prefHeight="115.0" prefWidth="383.0">
+               <children>
+                        <HBox prefHeight="56.0" prefWidth="383.0">
+                           <children>
+                              <Label prefHeight="31.0" prefWidth="307.0" text="Nombre de RDV pour aujourd huit">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font></Label>
+                              <TextField prefHeight="38.0" prefWidth="77.0" />
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="45.0" prefWidth="192.0">
+                           <children>
+                              <Label prefHeight="43.0" prefWidth="318.0" text="Nombre Medicaments">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font></Label>
+                              <TextField fx:id="nb_Med" editable="false" prefHeight="37.0" prefWidth="84.0" />
+                           </children>
+                        </HBox>
+               </children>
+            </VBox>
+            <Separator layoutX="211.0" layoutY="-2.0" orientation="VERTICAL" prefHeight="600.0" prefWidth="11.0" />
+                 </children>
+        </Pane>
+    </children>
+</AnchorPane>

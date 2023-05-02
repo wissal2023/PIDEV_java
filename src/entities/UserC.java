@@ -1,50 +1,47 @@
 package entities;
 
 import java.util.Date;
+import java.util.List;
 
 
 
-public class User {
+public class UserC {
     private int id;
-    private String email;
-    private String nom;
-    private String prenom;
-    private String password;
-    private Date date_de_naissance;
-    private String sexe;
-    private String Adresse;
-    private String tel;
-    private String specialité;
-    private String etat;
-    private Date date_de_creation;
-    private String roles;
-    private String Image;
-    private String cin;
+    private String email, nom, prenom, password, sexe, Adresse, tel, specialité, etat, roles, Image, cin;
+    private Date date_de_naissance, date_de_creation;
+    private List<RendezVousC> rendezVousList;
+    private List<Consultation> consultationList;
 
-
-    public User() {
+    public UserC() {
     }
 
-    public User(int id,String nom, String prenom) {
+    public UserC(int id,String nom, String prenom) {
         this.id=id;
         this.nom = nom;
         this.prenom = prenom;
     }
 
-    public User(String nom, String tel, String cin) {
+    public UserC(String nom, String tel, String cin) {
         this.nom = nom;
         this.tel = tel;
         this.cin = cin;
     }
-    
 
+    public UserC(int id, String nom, String prenom, String roles, List<RendezVousC> rendezVousList, List<Consultation> consultationList) {
+        this.id = id;
+        this.nom = nom;
+        this.prenom = prenom;
+        this.roles = roles;
+        this.rendezVousList = rendezVousList;
+        this.consultationList = consultationList;
+    }
     
-     public User(int id,String image) {
+     public UserC(int id,String image) {
         this.id=id;
         this.Image=image;
     }
      
-    public User(int id,String nom, String prenom,String email, Date date_de_naissance, String sexe, String tel, String Adresse, String specialité,String image) {
+    public UserC(int id,String nom, String prenom,String email, Date date_de_naissance, String sexe, String tel, String Adresse, String specialité,String image) {
        
         this.id=id;
         this.nom = nom;
@@ -59,7 +56,7 @@ public class User {
     
     }
     
-      public User(String nom, String prenom,String email, Date date_de_naissance, String sexe, String tel, String Adresse) {
+      public UserC(String nom, String prenom,String email, Date date_de_naissance, String sexe, String tel, String Adresse) {
        
         this.nom = nom;
         this.prenom = prenom;
@@ -70,7 +67,7 @@ public class User {
         this.Adresse = Adresse;    
     }
       
-       public User(String nom, String prenom,String email, Date date_de_naissance, String sexe, String tel, String Adresse,String specialite) {
+       public UserC(String nom, String prenom,String email, Date date_de_naissance, String sexe, String tel, String Adresse,String specialite) {
        
         this.nom = nom;
         this.prenom = prenom;
@@ -84,7 +81,7 @@ public class User {
     
     
     
-        public User(int id,String nom, String prenom,String email, Date date_de_naissance, String sexe, String tel, String Adresse,String image) {
+        public UserC(int id,String nom, String prenom,String email, Date date_de_naissance, String sexe, String tel, String Adresse,String image) {
        
         this.id=id;
         this.nom = nom;
@@ -101,7 +98,7 @@ public class User {
     
     
 
-    public User(int id, String nom, String prenom, String email, String password, String etat, Date date_de_naissance, String roles,String Adresse,String sexe,String tel,String specialite,Date date_de_creation,String image) {
+    public UserC(int id, String nom, String prenom, String email, String password, String etat, Date date_de_naissance, String roles,String Adresse,String sexe,String tel,String specialite,Date date_de_creation,String image) {
         this.id = id;
         this.nom = nom;
         this.prenom = prenom;
@@ -119,7 +116,7 @@ public class User {
         
     }
 
-    public User(String nom, String prenom, String email, String password) {
+    public UserC(String nom, String prenom, String email, String password) {
         this.id = id;
         this.nom = nom;
         this.prenom = prenom;
@@ -127,6 +124,7 @@ public class User {
         this.password = password;
     }
 
+//******************* GETTERS & SETTERS *************************************    
     public int getId() {
         return id;
     }
@@ -171,6 +169,15 @@ public class User {
         return password;
     }
 
+    public List<RendezVousC> getRendezVousList() {
+        return rendezVousList;
+    }
+
+    public List<Consultation> getConsultationList() {
+        return consultationList;
+    }
+    
+    
     public void setPassword(String password) {
         this.password = password;
     }
@@ -250,10 +257,19 @@ public class User {
         this.roles = roles;
     }
 
+    public void setRendezVousList(List<RendezVousC> rendezVousList) {
+        this.rendezVousList = rendezVousList;
+    }
+
+    public void setConsultationList(List<Consultation> consultationList) {
+        this.consultationList = consultationList;
+    }
+
     @Override
     public String toString() {
-        return "User{" + "id=" + id + ", email=" + email + ", nom=" + nom + ", prenom=" + prenom + ", password=" + password + ", date_de_naissance=" + date_de_naissance + ", sexe=" + sexe + ", Adresse=" + Adresse + ", tel=" + tel + ", specialit\u00e9=" + specialité + ", etat=" + etat + ", date_de_creation=" + date_de_creation + ", roles=" + roles + ", Image=" + Image + '}';
+        return "User{" + "id=" + id + ", email=" + email + ", nom=" + nom + ", prenom=" + prenom + ", password=" + password + ", sexe=" + sexe + ", Adresse=" + Adresse + ", tel=" + tel + ", specialit\u00e9=" + specialité + ", etat=" + etat + ", roles=" + roles + ", Image=" + Image + ", cin=" + cin + ", date_de_naissance=" + date_de_naissance + ", date_de_creation=" + date_de_creation + ", rendezVousList=" + rendezVousList + ", consultationList=" + consultationList + '}';
     }
+    
 
   
 }

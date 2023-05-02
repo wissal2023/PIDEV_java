@@ -2,8 +2,7 @@ package entities;
 
 import java.util.Date;
 
-public class Ordonnance {
-    
+public class Ordonnance {    
     private int id, nombre_jours, dosage;
     private String medicaments, code_ordonnance, description ;
     private Date date_de_creation, date_de_modification;
@@ -22,21 +21,46 @@ public class Ordonnance {
         this.date_de_modification = date_de_modification;
     }
 
-    public Ordonnance(String description, String medicaments, int dosage, int nombre_jours) {
+    public Ordonnance(int nombre_jours, int dosage, String medicaments, String description, Date date_de_modification) {
+        this.nombre_jours = nombre_jours;
+        this.dosage = dosage;
+        this.medicaments = medicaments;
+        this.description = description;
+        this.date_de_modification = date_de_modification;
+    }
 
+    public Ordonnance(String code_ordonnance, String description, String medicaments, int dosage, int nombre_jours, Date date_de_creation) {
+        this.code_ordonnance = code_ordonnance;
         this.description = description;
         this.medicaments = medicaments;
         this.dosage = dosage;
-         this.nombre_jours = nombre_jours;
-    }
-    
-    
+        this.nombre_jours = nombre_jours;
+       this.date_de_modification = date_de_creation;
+}
+    public Ordonnance(String code_ordonnance, String description, String medicaments, int dosage, int nombre_jours) {
+        this.code_ordonnance = code_ordonnance;
+        this.description = description;
+        this.medicaments = medicaments;
+        this.dosage = dosage;
+        this.nombre_jours = nombre_jours;
+}
+    public Ordonnance(String code_ordonnance, String medicaments, String description, Date date_de_modification) {
+        this.code_ordonnance = code_ordonnance;
+        this.medicaments = medicaments;
+        this.description = description;
+        this.date_de_modification = date_de_modification;
+    }   
+
 
 
     public int getId() {
         return id;
     }
-
+    public int getConsult_id() {
+        return 0;
+        
+    }
+    
     public int getNombre_jours() {
         return nombre_jours;
     }
@@ -106,6 +130,10 @@ public class Ordonnance {
                 + description + ", date_de_creation=" + date_de_creation +
                 ", date_de_modification=" + date_de_modification + '}';
     }
+
+    
+
+    
     
     
     

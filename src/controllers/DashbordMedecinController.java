@@ -1,6 +1,5 @@
 package controllers;
 
-import entities.User;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
@@ -9,7 +8,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
-import java.sql.Blob;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -19,39 +17,23 @@ import javafx.scene.Scene;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import utils.MyConnection;
 
-public class MedecinDashbordController implements Initializable {
+public class DashbordMedecinController implements Initializable {
 
     @FXML
     private ImageView imgDoc;
     @FXML
-    private TextField Txt_nom;
-    @FXML
-    private TextField Txt_special;
-    @FXML
-    private TextField Txt_adress;
-    @FXML
-    private TextField Txt_mail;
-    @FXML
-    private TextField Txt_tel;
-    
+    private TextField Txt_nom, Txt_special, Txt_adress, Txt_mail, Txt_tel, nb_Med, nb_Tot_Consult, Rev;    
     @FXML
     private BarChart<String, Number> barChart;    
-    @FXML
-    private TextField nb_Med;
-    @FXML
-    private TextField nb_Tot_Consult;   
-    @FXML
-    private TextField Rev;
     
     private final Connection cnx;
     private PreparedStatement pste;
     
-    public MedecinDashbordController() {
+    public DashbordMedecinController() {
         MyConnection bd = MyConnection.getInstance();
         cnx=bd.getCnx();
     }
@@ -59,14 +41,14 @@ public class MedecinDashbordController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
               
-        //nb_Med.setText("0");
-        String query = "SELECT u.nom, u.specialite, u.adresse, u.email, u.num_tel, u.image FROM User u WHERE u.roles LIKE '[\"medcin\"]' ";
+        nb_Med.setText("3");
+        String query = "SELECT u.prenom, u.specialite, u.adresse, u.email, u.num_tel, u.image FROM User u WHERE u.roles LIKE '[\"medcin\"]' ";
         try {
             
             pste = cnx.prepareStatement(query);
             ResultSet rs = pste.executeQuery();
             if(rs.next()) {
-                String nom = rs.getString("nom");
+                String nom = rs.getString("prenom");
                 String specialite = rs.getString("specialite");
                 String adresse = rs.getString("adresse");
                 String email = rs.getString("email");
@@ -89,7 +71,7 @@ public class MedecinDashbordController implements Initializable {
         } catch(SQLException ex) {
             System.out.println("Error while fetching doctor information: " + ex.getMessage());
         }
-        //******* stat*****
+        //******* stat****************************************************************************************************
         try {
             String queryStat = "SELECT COUNT(*) AS nbConsultations, SUM(prix) AS totalPrix FROM consultation";
             pste = cnx.prepareStatement(queryStat);
@@ -103,7 +85,7 @@ public class MedecinDashbordController implements Initializable {
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
-//------- chart -------
+//------- chart -----------------------------------------------------------------------------------------------------
        try {
             String queryChartData = "SELECT date, COUNT(*) AS nbConsultations FROM rendez_vous GROUP BY date";
             pste = cnx.prepareStatement(queryChartData);

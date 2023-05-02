@@ -2,7 +2,7 @@ package entities;
 
 import java.util.Date;
 
-public class Planning {
+public class PlanningC {
     private int idPlanning;
     private String description;
     private String etat;
@@ -11,10 +11,10 @@ public class Planning {
     private Date heureDebut;
     private Date heureFin;
 
-    public Planning() {
+    public PlanningC() {
     }
 
-    public Planning(int idPlanning, String description, Date dateDebut, Date DateFin, Date heureDebut, Date heureFin) {
+    public PlanningC(int idPlanning, String description, Date dateDebut, Date DateFin, Date heureDebut, Date heureFin) {
         this.idPlanning = idPlanning;
         this.description = description;
         this.dateDebut = dateDebut;
@@ -22,7 +22,7 @@ public class Planning {
         this.heureDebut = heureDebut;
         this.heureFin = heureFin;
     }
-    public Planning(int idPlanning, String description,String etat, Date dateDebut, Date DateFin, Date heureDebut, Date heureFin) {
+    public PlanningC(int idPlanning, String description,String etat, Date dateDebut, Date DateFin, Date heureDebut, Date heureFin) {
         this.idPlanning = idPlanning;
         this.description = description;
         this.etat = etat;
@@ -32,7 +32,7 @@ public class Planning {
         this.heureFin = heureFin;
     }
 
-    public Planning(String description, Date dateDebut, Date DateFin, Date heureDebut, Date heureFin) {
+    public PlanningC(String description, Date dateDebut, Date DateFin, Date heureDebut, Date heureFin) {
         this.description = description;
         this.dateDebut = dateDebut;
         this.DateFin = DateFin;
@@ -40,7 +40,7 @@ public class Planning {
         this.heureFin = heureFin;
     }
 
-    public Planning(String description, Date dateDebut, Date DateFin) {
+    public PlanningC(String description, Date dateDebut, Date DateFin) {
         this.description = description;
         this.dateDebut = dateDebut;
         this.DateFin = DateFin;

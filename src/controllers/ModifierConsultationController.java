@@ -1,6 +1,7 @@
 package controllers;
 
 import entities.Consultation;
+import entities.RendezVousC;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -28,52 +29,19 @@ import utils.MyConnection;
 public class ModifierConsultationController implements Initializable {
 
     @FXML
-    private TextField NumConslt;
-    
-    @FXML
-    private TextField txt_poid;
-
-    @FXML
-    private TextField txt_taill;
-
-    @FXML
-    private TextField txt_imc;
-
-    @FXML
-    private TextField txt_temp;
-
-    @FXML
-    private TextField txt_press;
-
-    @FXML
-    private TextField txt_freq;
-
-    @FXML
-    private TextField txt_tx;
-
-    @FXML
-    private TextField txt_mal;
-
-    @FXML
-    private TextField txt_trait;
-
-    @FXML
-    private TextField txt_px;
-
+    private TextField NumConslt, txt_poid, txt_taill, txt_imc, txt_temp, txt_press, txt_freq, txt_tx, txt_mal, txt_trait, txt_px;
     @FXML
     private TextArea txt_obsv;
-
     @FXML
     private Button btn_valider;
     
 
-    private final Connection cnx;
-    private PreparedStatement ste;
-    
-    public ModifierConsultationController() {
-        MyConnection bd = MyConnection.getInstance();
-        cnx=bd.getCnx();
-    }
+private final Connection cnx;
+private PreparedStatement ste;    
+public ModifierConsultationController() {
+    MyConnection bd = MyConnection.getInstance();
+    cnx=bd.getCnx();
+}
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -164,7 +132,8 @@ public class ModifierConsultationController implements Initializable {
                     txt_mal.getText(), txt_trait.getText(),txt_obsv.getText());
             
             ConsultationService consultService = new ConsultationService();
-            consultService.ajouterConsultation(c);
+            RendezVousC r = new RendezVousC();
+            consultService.ajouterConsultation(c,r);
             
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("AJOUT AVEC SUCCES");

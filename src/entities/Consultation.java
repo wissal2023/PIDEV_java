@@ -1,20 +1,25 @@
 package entities;
 
-public class Consultation {
-    
-    private int idConslt;
+
+public class Consultation {  
+    private int idConslt, idRdv;
     private float poids, taille, imc, temperature, prix, pression_arterielle, frequence_cardiaque, taux_glycemie;
-    private String maladie, traitement, observation;
+    private String maladie, traitement, observation, patientName;
+    private RendezVousC rendezVous;
+    private FicheMedicale ficheMedicale;
+    private Ordonnance ordonnance;
 
     public Consultation() {
+        
     }
 
-    public Consultation(int idConslt, float poids, float taille, float imc, float temperature, float prix, float pression_arterielle, float frequence_cardiaque, float taux_glycemie, String maladie, String traitement, String observation) {
+    public Consultation(int idConslt, String patientName, float poids, float taille, float imc, float temperature, float prix, float pression_arterielle, float frequence_cardiaque, float taux_glycemie, String maladie, String traitement, String observation, FicheMedicale ficheMedicale, Ordonnance ordonnance) {
         this.idConslt = idConslt;
+        this.patientName = patientName;
         this.poids = poids;
         this.taille = taille;
         this.imc = imc;
-        this.temperature = temperature;        
+        this.temperature = temperature;
         this.prix = prix;
         this.pression_arterielle = pression_arterielle;
         this.frequence_cardiaque = frequence_cardiaque;
@@ -22,8 +27,9 @@ public class Consultation {
         this.maladie = maladie;
         this.traitement = traitement;
         this.observation = observation;
+        this.ficheMedicale = ficheMedicale;
+        this.ordonnance = ordonnance;
     }
-
     public Consultation(int idConslt, float poids, float taille, float prix, String maladie, String traitement) {
         this.idConslt = idConslt;
         this.poids = poids;
@@ -33,6 +39,20 @@ public class Consultation {
         this.traitement = traitement;
     }
 
+    public Consultation(int idConslt,float poids, float taille, float imc, float temperature, float prix, float pression_arterielle, float frequence_cardiaque, float taux_glycemie, String maladie, String traitement, String observation) {
+        this.idConslt = idConslt;
+        this.poids = poids;
+        this.taille = taille;
+        this.imc = imc;
+        this.temperature = temperature;
+        this.prix = prix;
+        this.pression_arterielle = pression_arterielle;
+        this.frequence_cardiaque = frequence_cardiaque;
+        this.taux_glycemie = taux_glycemie;
+        this.maladie = maladie;
+        this.traitement = traitement;
+        this.observation = observation;
+    }
     public Consultation(float poids, float taille, float imc, float temperature, float prix, float pression_arterielle, float frequence_cardiaque, float taux_glycemie, String maladie, String traitement, String observation) {
         this.poids = poids;
         this.taille = taille;
@@ -47,8 +67,58 @@ public class Consultation {
         this.observation = observation;
     }
 
+    public Consultation(int idConslt, String idPatient, int idRdv, RendezVousC rendezVous) {
+        this.idConslt = idConslt;
+        this.patientName = patientName;
+        this.idRdv = idRdv;
+        this.rendezVous = rendezVous;
+    }
+//********************** GETTERS AND SETTERS ****************************
+
+    public FicheMedicale getFicheMedicale() {
+        return ficheMedicale;
+    }
+
+    public Ordonnance getOrdonnance() {
+        return ordonnance;
+    }
+
+    public void setFicheMedicale(FicheMedicale ficheMedicale) {
+        this.ficheMedicale = ficheMedicale;
+    }
+
+    public void setOrdonnance(Ordonnance ordonnance) {
+        this.ordonnance = ordonnance;
+    }
+    
+    
+    
+    public String getPatientName() {
+        return patientName;
+    }
+
+    public int getIdRdv() {
+        return idRdv;
+    }
+
+    public RendezVousC getRendezVous() {
+        return rendezVous;
+    }
+
+    public void setPatientName(String patientName) {
+        this.patientName = patientName;
+    }
+
+    public void setIdRdv(int idRdv) {
+        this.idRdv = idRdv;
+    }
+
+    public void setRendezVous(RendezVousC rendezVous) {
+        this.rendezVous = rendezVous;
+    }
     
 
+    
     public int getIdConslt() {
         return idConslt;
     }
@@ -100,7 +170,7 @@ public class Consultation {
     public void setIdConslt(int idConslt) {
         this.idConslt = idConslt;
     }
-
+    
     public void setPoids(float poids) {
         this.poids = poids;
     }
@@ -145,14 +215,6 @@ public class Consultation {
         this.observation = observation;
     }
 
-    @Override
-    public String toString() {
-        return "Consultation{" + "idConslt=" + idConslt + ", poids=" + poids + 
-                ", taille=" + taille + ", imc=" + imc + ", temperature=" 
-                + temperature + ", prix=" + prix + ", pression_arterielle=" + pression_arterielle 
-                + ", frequence_cardiaque=" + frequence_cardiaque + ", taux_glycemie=" 
-                + taux_glycemie + ", maladie=" + maladie + ", traitement=" 
-                + traitement + ", observation=" + observation + '}';
-    }
-        
+
+       
 }

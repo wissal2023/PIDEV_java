@@ -2,8 +2,7 @@ package entities;
 
 import java.util.Date;
 
-public class FicheMedicale {
-    
+public class FicheMedicale {    
     private int id;
     private String description, allergies, pathologie;
     private Date date_de_creation, date_de_modification;
@@ -26,12 +25,23 @@ public class FicheMedicale {
         this.date_de_creation = date_de_creation;
     }
 
-    public FicheMedicale(String description, String allergies, String pathologie, Date date_de_creation) {
+    public FicheMedicale(String description, String allergies, String pathologie, Date date_de_modification) {
         this.description = description;
         this.allergies = allergies;
         this.pathologie = pathologie;
-        this.date_de_creation = date_de_creation;
+        this.date_de_modification = date_de_modification;
     }
+
+    public FicheMedicale(int parseInt, String text, String text0, String text1, Date parse) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public FicheMedicale(int idFich, String string, String string0, java.sql.Date date) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    
+
 
     public int getId() {
         return id;
@@ -88,6 +98,14 @@ public class FicheMedicale {
                 + ", allergies=" + allergies + ", pathologie=" + pathologie 
                 + ", date_de_creation=" + date_de_creation + ", date_de_modification=" 
                 + date_de_modification + '}';
+    }
+
+    public String getImgPath() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public void addConsultation(Consultation consult) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     

@@ -11,33 +11,23 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" prefHeight="520.0" prefWidth="409.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AjouterOrdonnanceController">
+<AnchorPane id="AnchorPane" prefHeight="520.0" prefWidth="409.0" style="-fx-background-color: ffffff;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ModifierOrdonnanceController">
     <children>
-      <Label layoutX="83.0" layoutY="8.0" text="Ajouter Ordonnance" textAlignment="CENTER" textFill="#3b88d0">
-         <font>
-            <Font name="System Bold" size="24.0" />
-         </font>
-      </Label>
-      <Button id="btn_valider" fx:id="btn_valider" layoutX="222.0" layoutY="459.0" mnemonicParsing="false" onAction="#Valider" prefHeight="36.0" prefWidth="108.0" style="-fx-background-color: #2be131;" text="valider" />            
-      <ImageView fitHeight="274.0" fitWidth="411.0" layoutX="-7.0" layoutY="156.0" opacity="0.12" pickOnBounds="true" preserveRatio="true">
+        <ImageView fitHeight="274.0" fitWidth="411.0" layoutY="160.0" opacity="0.12" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../utils/ordonnance.jpg" />
          </image>
       </ImageView>
-      <Button fx:id="BT_reset" layoutX="90.0" layoutY="459.0" mnemonicParsing="false" onAction="#Reset" prefHeight="36.0" prefWidth="108.0" style="-fx-background-color: #80c8e4;" text="reset" />
+      <Label layoutX="83.0" layoutY="8.0" text="Modifier Ordonnance" textAlignment="CENTER" textFill="#3b88d0">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Label>      
       <Text layoutX="14.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Patient:">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
       </Text>
-      <HBox alignment="CENTER_LEFT" layoutX="14.0" layoutY="168.0" prefHeight="44.0" prefWidth="385.0">
-         <children>
-            <Label prefHeight="17.0" prefWidth="40.0" text="Date:" />
-            <TextField fx:id="dateRDV" editable="false" prefHeight="25.0" prefWidth="103.0" />
-            <Label alignment="CENTER" prefHeight="17.0" prefWidth="150.0" text="Heur debut Consultation" />
-            <TextField fx:id="hDebut" editable="false" prefHeight="25.0" prefWidth="77.0" />
-         </children>
-      </HBox>
       <VBox layoutX="14.0" layoutY="75.0" prefHeight="85.0" prefWidth="237.0">
          <children>
             <HBox prefHeight="17.0" prefWidth="238.0">
@@ -60,14 +50,26 @@
             </HBox>
          </children>
       </VBox>
+      <HBox alignment="CENTER_LEFT" layoutX="14.0" layoutY="168.0" prefHeight="44.0" prefWidth="385.0">
+         <children>
+            <Label prefHeight="17.0" prefWidth="40.0" text="Date:" />
+            <TextField fx:id="dateRDV" editable="false" prefHeight="25.0" prefWidth="103.0" />
+            <Label alignment="CENTER" prefHeight="17.0" prefWidth="150.0" text="Heur debut Consultation" />
+            <TextField fx:id="hDebut" editable="false" prefHeight="25.0" prefWidth="77.0" />
+         </children>
+      </HBox>
       <VBox layoutX="17.0" layoutY="230.0" prefHeight="191.0" prefWidth="385.0">
          <children>
-            <HBox prefHeight="36.0" prefWidth="385.0">
-               <children>
-                  <Label prefHeight="30.0" prefWidth="135.0" text="Code Ordonnance" />
-                  <TextField fx:id="txt_codeOrd" editable="false" prefHeight="31.0" prefWidth="233.0" />
-               </children>
-            </HBox>
+             <HBox layoutX="17.0" layoutY="156.0" prefHeight="36.0" prefWidth="385.0">
+                <children>
+                   <Label prefHeight="30.0" prefWidth="135.0" text="Code ordonnance:" textFill="#3b1bcd">
+                      <font>
+                         <Font name="System Bold" size="13.0" />
+                      </font>
+                   </Label>
+                   <TextField fx:id="codeOrd" disable="true" editable="false" prefHeight="31.0" prefWidth="233.0" />
+                </children>
+             </HBox>
             <HBox prefHeight="36.0" prefWidth="385.0">
                <children>
                   <Label prefHeight="30.0" prefWidth="135.0" text="Description" />
@@ -89,10 +91,32 @@
             <HBox prefHeight="36.0" prefWidth="385.0">
                <children>
                   <Label prefHeight="30.0" prefWidth="135.0" text="Nombre de jour" />
-                  <TextField fx:id="txt_nbr" prefHeight="31.0" prefWidth="233.0" />
+                  <TextField fx:id="txt_nbrJ" prefHeight="31.0" prefWidth="233.0" />
+               </children>
+            </HBox>
+            <HBox prefHeight="36.0" prefWidth="385.0">
+               <children>
+                  <Label prefHeight="30.0" prefWidth="135.0" text="date de modification">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="txt_date" prefHeight="31.0" prefWidth="233.0" />
                </children>
             </HBox>
          </children>
       </VBox>
-   </children>    
+      
+      <Button id="btn_valider" fx:id="btn_valider" layoutX="218.0" layoutY="458.0" mnemonicParsing="false" onAction="#Valider" prefHeight="50.0" prefWidth="125.0" style="-fx-background-color: #2be131;" text="valider">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font></Button>
+      <Button fx:id="BT_reset" layoutX="70.0" layoutY="458.0" mnemonicParsing="false" onAction="#Reset" prefHeight="50.0" prefWidth="125.0" style="-fx-background-color: #80c8e4;" text="reset">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font></Button>
+      
+      <ImageView fx:id="qrCode" fitHeight="85.0" fitWidth="92.0" layoutX="280.0" layoutY="60.0" pickOnBounds="true" preserveRatio="true" />
+   
+    </children>
 </AnchorPane>
