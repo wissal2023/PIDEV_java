@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane id="AnchorPane" prefHeight="399.0" prefWidth="338.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ModifierFichMedController">
+   <children>
+      <HBox alignment="CENTER" layoutY="-3.0" prefHeight="59.0" prefWidth="338.0">
+         <children>
+            <Label alignment="CENTER" prefHeight="40.0" prefWidth="271.0" text="Modifier Fiche Medicale N°:" textAlignment="CENTER" textFill="#3b88d0">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="lb_num" prefHeight="40.0" prefWidth="57.0" text="num" textFill="#3b88d0">
+               <font>
+                  <Font name="System Bold" size="17.0" />
+               </font>
+            </Label>
+         </children>
+      </HBox>
+      <Text fill="#e10f0f" fontSmoothingType="LCD" layoutX="13.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CONFIDENTIEL" textAlignment="CENTER" wrappingWidth="313.0">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Text>
+      <VBox layoutX="23.0" layoutY="84.0" prefHeight="87.0" prefWidth="271.0">
+         <children>
+            <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="240.0">
+               <children>
+                  <Label prefHeight="25.0" prefWidth="110.0" text="Date création" />
+                  <TextField fx:id="txt_dateCrea" editable="false" prefHeight="25.0" prefWidth="160.0" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="35.0" prefWidth="223.0">
+               <children>
+                  <Label alignment="CENTER" prefHeight="25.0" prefWidth="110.0" text="Date modification" />
+                  <TextField fx:id="txt_dateModif" prefHeight="25.0" prefWidth="160.0" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+      <VBox alignment="CENTER" layoutX="17.0" layoutY="187.0" prefHeight="106.0" prefWidth="284.0">
+         <children>
+            <HBox prefHeight="40.0" prefWidth="235.0">
+               <children>
+                  <Label alignment="CENTER" prefHeight="25.0" prefWidth="100.0" text="Description" />
+                  <TextField fx:id="txt_desc" prefHeight="25.0" prefWidth="164.0" />
+               </children>
+            </HBox>
+            <HBox prefHeight="40.0" prefWidth="235.0">
+               <children>
+                  <Label alignment="CENTER" prefHeight="25.0" prefWidth="101.0" text="Allergie" />
+                  <TextField fx:id="ch_allerg" prefHeight="25.0" prefWidth="165.0" />
+               </children>
+            </HBox>
+            <HBox prefHeight="40.0" prefWidth="235.0">
+               <children>
+                  <Label alignment="CENTER" prefHeight="25.0" prefWidth="100.0" text="Pathologie" />
+                  <TextField fx:id="ch_path" prefHeight="25.0" prefWidth="165.0" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+      <Button id="btn_valider" fx:id="btn_valider" layoutX="193.0" layoutY="329.0" mnemonicParsing="false" onAction="#Valider" prefHeight="42.0" prefWidth="109.0" style="-fx-background-color: #2be131;" text="valider" />
+      <Button fx:id="BT_reset" layoutX="37.0" layoutY="329.0" mnemonicParsing="false" onAction="#Reset" prefHeight="42.0" prefWidth="109.0" style="-fx-background-color: #80c8e4;" text="reset" />
+   </children>
+</AnchorPane>
